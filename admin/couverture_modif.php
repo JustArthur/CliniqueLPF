@@ -114,6 +114,12 @@
                 $modifCouverture = $DB->prepare("UPDATE couverture SET organisme = ?, assure = ?, ald = ?, nomMutuelle = ?, numAdherent = ? WHERE numSecu = ?;");
                 $modifCouverture->execute([$_SESSION['couvertureSociale'][1], $_SESSION['couvertureSociale'][2], $_SESSION['couvertureSociale'][3], $_SESSION['couvertureSociale'][4], $_SESSION['couvertureSociale'][5], $_SESSION['preadmission'][0]]);
 
+                $textLog = "Modification d'une pré-admission";
+                $dateLog = date('Y-m-d H:i');
+
+                $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
+                $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
+
                 if($_SESSION['preadmision'][4] != $chambre) {
                     $modifCouverture = $DB->prepare("UPDATE preadmission SET idChambre = ? WHERE id = ?");
                     $modifCouverture->execute([$_SESSION['couvertureSociale'][6], $_SESSION['preadmission'][0]]);

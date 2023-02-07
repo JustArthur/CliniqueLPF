@@ -17,6 +17,12 @@
             $supp = $DB->prepare("UPDATE preadmission SET status='Annulé' WHERE id = ?");
             $supp->execute([$_GET['id']]);
 
+            $textLog = "Annulation d'une pré-admission";
+            $dateLog = date('Y-m-d H:i');
+
+            $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
+            $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
+
             header('Location: voir_preadmission');
             exit;
         }
