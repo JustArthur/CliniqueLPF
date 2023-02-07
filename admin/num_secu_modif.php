@@ -51,6 +51,10 @@
                     );
 
                     switch($_SESSION['preadmission'][5]) {
+                        case 'Annulé':
+                            $erreur = 'La pré-admission à été annulé.';
+                            break;
+                        
                         case 'En cours':
                             $erreur = 'La pré-admission est en cours, impossible de la modifier.';
                             break;
