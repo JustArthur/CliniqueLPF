@@ -1,6 +1,11 @@
 <?php
     include_once('../include.php');
 
+    if(!isset($_SESSION['utilisateur'][5]) AND $_SESSION['utilisateur'][3] != 1) {
+        header('Location: panel');
+        exit;
+    }
+
     $couverture = $DB->prepare("SELECT * FROM couverture WHERE numSecu = ?");
     $couverture->execute([$_SESSION['preadmission'][1]]);
     $couverture = $couverture->fetch();

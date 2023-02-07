@@ -1,6 +1,11 @@
 <?php
     include_once('../include.php');
 
+    if(!isset($_SESSION['utilisateur'][5]) AND $_SESSION['utilisateur'][3] != 1) {
+        header('Location: panel');
+        exit;
+    }
+
     $_SESSION['preadmission'] = array();
 
     $erreur = '';
@@ -39,8 +44,11 @@
                 $chercherPreAdmission = $DB->prepare("SELECT * FROM preadmission WHERE idPatient = ? AND status = 'Pas réalisé'");
                 $chercherPreAdmission->execute([$numSecu]);
                 $chercherPreAdmission = $chercherPreAdmission->fetch();
+                $chercherPreAdmissionCount = $chercherPreAdmission->rowCount();
 
-                if(isset($chercherPreAdmission['idPatient'])) {
+                if($chercherPreAdmissionCount == 0) {
+
+                } elseif($chercherPreAdmissionCount == 1) {
                     $_SESSION['preadmission'] = array(
                         $chercherPreAdmission['id'], //0
                         $chercherPreAdmission['idPatient'], //1
@@ -60,10 +68,15 @@
                             break;
                         
                         case 'Pas réalisé';
-                            header('Location: modif_admission');
-                            exit;
+                            // header('Location: modif_admission');
+                            // exit;
+
+                            $erreur = 'Possible.';
                             break;
                     }
+
+                } elseif($chercherPreAdmissionCount > 1) {
+                    $erreur = 'Plus de 1.';
 
                 } else {
                     $erreur = "Ce patient est inscrit à aucune des pré-admissions disponible.";

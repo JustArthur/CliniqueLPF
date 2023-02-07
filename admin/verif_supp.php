@@ -1,6 +1,11 @@
 <?php
     include_once('../include.php');
 
+    if(!isset($_SESSION['utilisateur'][5]) AND $_SESSION['utilisateur'][3] != 1) {
+        header('Location: panel');
+        exit;
+    }
+
     $cherchePrea = $DB->prepare("SELECT idOperation FROM preadmission WHERE id = ?");
     $cherchePrea->execute([$_GET['id']]);
     $cherchePrea = $cherchePrea->fetch();
@@ -11,9 +16,6 @@
         if(isset($_POST['oui'])) {
             $supp = $DB->prepare("UPDATE preadmission SET status='Annulé' WHERE id = ?");
             $supp->execute([$_GET['id']]);
-
-            // $suppOp = $DB->prepare("DELETE FROM operations WHERE id = ?");
-            // $suppOp->execute([$cherchePrea['idOperation']]);
 
             header('Location: voir_preadmission');
             exit;
