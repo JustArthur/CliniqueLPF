@@ -8,6 +8,7 @@
     list-style: none;
     font-family: 'Rubik', sans-serif;
     font-style: normal;
+    user-select: none;
 }
 
 nav {
