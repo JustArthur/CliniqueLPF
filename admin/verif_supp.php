@@ -23,7 +23,7 @@
             $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
             $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
 
-            header('Location: voir_preadmission');
+            header('Location: panel');
             exit;
         }
 

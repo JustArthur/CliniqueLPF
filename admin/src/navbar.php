@@ -7,7 +7,7 @@
             <ul class="dropdown">
                 <li><a href="num_secu_creer">Créer une pré-admision</a></li>
                 <li><a href="num_secu_modif">Modifier une pré-admision</a></li>
-                <li><a href="#">Supprimer une pré-admision</a></li>
+                <li><a href="num_secu_supp">Supprimer une pré-admision</a></li>
             </ul>
         </li>
         <?php } ?>

@@ -70,10 +70,9 @@
                             break;
                         
                         case 'Pas réalisé';
-                            // header('Location: modif_admission');
-                            // exit;
+                            header('Location: modif_admission');
+                            exit;
 
-                            $erreur = 'Possible.';
                             break;
                     }
 
