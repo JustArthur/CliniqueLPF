@@ -1,6 +1,11 @@
 <?php
     include_once('../include.php');
 
+    if(!isset($_SESSION['utilisateur'][5])) {
+        header('Location: ../index');
+        exit;
+    }
+
     $dateAujourdhui = date('Y-m-d');
 
     $nbr_admission_today = $DB->prepare("SELECT * FROM operations WHERE dateOperation = ?");

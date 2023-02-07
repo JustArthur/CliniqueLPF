@@ -40,7 +40,7 @@
                     $info_medecin = $info_medecin->fetch();
 
                     $date = date_create($info_operation['dateOperation']);
-                    $jour = date_format($date, 'd-m-Y');
+                    $jour = date_format($date, 'd/m/Y');
 
                     $heure = date_create($info_operation['heureOperation']);
                     $horraire = date_format($heure, 'H:i');

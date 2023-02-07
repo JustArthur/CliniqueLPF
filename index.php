@@ -3,6 +3,11 @@
     ini_set("display_errors", 1);
     include_once('include.php');
 
+    if(isset($_SESSION['utilisateur'][5])) {
+        header('Location: admin/panel');
+        exit;
+    }
+
     $code = random_int(1000, 9999); 
 
     if(isset($_POST)) {
