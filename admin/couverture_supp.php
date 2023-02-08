@@ -99,41 +99,20 @@
 
         if(isset($_POST['next'])) {
 
-            if(isset($assure) != 0 && isset($ald) != 0 && isset($chambre) != 0) {
+            $suppAdmission = $DB->prepare("UPDATE preadmission SET status='Annulé' WHERE id = ?");
+            $suppAdmission->execute([$_SESSION['preadmission'][0]]);
 
-                $_SESSION['couvertureSociale'] = array(
-                    $_SESSION['preadmission'][0], //0
-                    $organisme, //1
-                    $assure, //2
-                    $ald, //3
-                    $nomMutuelle, //4
-                    $numAdherent, //5
-                    $chambre, //6
-                );
+            $textLog = "Modification d'une pré-admission";
+            $dateLog = date('Y-m-d H:i');
 
-                $modifCouverture = $DB->prepare("UPDATE couverture SET organisme = ?, assure = ?, ald = ?, nomMutuelle = ?, numAdherent = ? WHERE numSecu = ?;");
-                $modifCouverture->execute([$_SESSION['couvertureSociale'][1], $_SESSION['couvertureSociale'][2], $_SESSION['couvertureSociale'][3], $_SESSION['couvertureSociale'][4], $_SESSION['couvertureSociale'][5], $_SESSION['preadmission'][0]]);
+            $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
+            $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
 
-                $textLog = "Modification d'une pré-admission";
-                $dateLog = date('Y-m-d H:i');
+            header('Location: panel');
+            exit;
 
-                $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
-                $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
-
-                if($_SESSION['preadmision'][4] != $chambre) {
-                    $modifCouverture = $DB->prepare("UPDATE preadmission SET idChambre = ? WHERE id = ?");
-                    $modifCouverture->execute([$_SESSION['couvertureSociale'][6], $_SESSION['preadmission'][0]]);
-
-                    header('Location: panel');
-                    exit;
-                }
-
-                header('Location: panel');
-                exit;
-
-            } else {
-                $erreur = "Certain champs n'ont pas été remplis correctement.";
-            }
+        } else {
+            $erreur = "Certain champs n'ont pas été remplis correctement.";
         }
     }
 ?>
@@ -158,29 +137,29 @@
     <main>
         <h2>Couverture sociale du patient</h2>
         <form method="post">
-            <input required type="text" name="organisme" value="<?= $_SESSION['couvertureSociale'][1] ?>" id="" placeholder="Organisme de sécurité sociale / Nom de la caisse d'assurance maladie">
+            <input style="cursor:not-allowed" disabled type="text" name="organisme" value="<?= $_SESSION['couvertureSociale'][1] ?>" id="" placeholder="Organisme de sécurité sociale / Nom de la caisse d'assurance maladie">
 
-            <input required type="text" name="numSecuConfirm" disabled style="cursor: not-allowed;" value="<?= $_SESSION['couvertureSociale'][0] ?>" id="" placeholder="Numero de sécurité sociale">
+            <input style="cursor:not-allowed" disabled type="text" name="numSecuConfirm" disabled style="cursor: not-allowed;" value="<?= $_SESSION['couvertureSociale'][0] ?>" id="" placeholder="Numero de sécurité sociale">
 
             <div class="input">
-                <select name="assure" id="">
+                <select name="assure" style="cursor:not-allowed" disabled id="">
                     <option hidden value=0 >Le patient est t'il assuré ?</option>
                     <option value="oui" <?= $assureOui ?> >Oui il est assuré</option>
                     <option value="non" <?= $assureNon ?> >Non il n'est pas assuré</option>
                 </select>
 
-                <select name="ald" id="">
+                <select name="ald" style="cursor:not-allowed" disabled id="">
                     <option hidden value=0 >Le patient est t'il en ALD ?</option>
                     <option value="oui" <?= $aldOui ?> >Oui il est en ALD</option>
                     <option value="non" <?= $aldNon ?> >Non il n'est pas en ALD</option>
                 </select>
             </div>
 
-            <input required type="text" name="nomMutuelle" id="" value="<?= $_SESSION['couvertureSociale'][4] ?>" placeholder="Nom de la mutuelle ou de l'assurance">
+            <input type="text" style="cursor:not-allowed" disabled name="nomMutuelle" id="" value="<?= $_SESSION['couvertureSociale'][4] ?>" placeholder="Nom de la mutuelle ou de l'assurance">
 
-            <input required type="text" name="numAdherent" value="<?= $_SESSION['couvertureSociale'][5] ?>" id="" placeholder="Numéro d'ahérent">
+            <input type="text" style="cursor:not-allowed" disabled name="numAdherent" value="<?= $_SESSION['couvertureSociale'][5] ?>" id="" placeholder="Numéro d'ahérent">
 
-            <select name="chambre" id="">
+            <select name="chambre" style="cursor:not-allowed" disabled id="">
                 <option hidden value=0 > Chambre particulière ?</option>
 
                 <optgroup label="Avec équipements">
