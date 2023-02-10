@@ -7,6 +7,20 @@
         exit;
     }
 
+    $_SESSION['patient'] = array();
+    $_SESSION['personneConfiance'] = array();
+    $_SESSION['personnePrevenir'] = array();
+    $_SESSION['hospitalisation'] = array();
+    $_SESSION['couvertureSociale'] = array();
+
+    $_SESSION['creer_admission'] = array(
+        false, //0
+        false, //1
+        false, //2
+        false, //3
+        false //4
+    );
+
     $anneeChoix = date('Y');
     $semChoix = date('W');
 
@@ -100,6 +114,7 @@
     <link rel="stylesheet" href="../style/navBar.css">
 
     <title>Bienvenue, <?= $_SESSION['utilisateur'][0] . ' ' . $_SESSION['utilisateur'][1] ?></title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
 </head>
 <body>
 

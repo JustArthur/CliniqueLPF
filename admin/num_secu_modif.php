@@ -102,13 +102,14 @@
     <link rel="stylesheet" href="../style/numSecu.css">
     <link rel="stylesheet" href="../style/navBar.css">
 
-    <title>Document</title>
+    <title>Modifier une pré-admission</title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
 </head>
 <body>
     <?php require_once('src/navbar.php'); ?>
 
     <form method="post">
-        <h1>Modifier une préadmission</h1>
+        <h1>Modifier une pré-admission</h1>
 
         <?php if($erreur != '') { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
 

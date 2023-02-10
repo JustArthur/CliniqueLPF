@@ -116,7 +116,8 @@
     <link rel="stylesheet" href="../style/numSecu.css">
     <link rel="stylesheet" href="../style/navBar.css">
 
-    <title>Document</title>
+    <title>Créer une nouvelle pré-admission</title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
 </head>
 <body>
     <?php

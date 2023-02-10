@@ -102,13 +102,15 @@
     <link rel="stylesheet" href="../style/numSecu.css">
     <link rel="stylesheet" href="../style/navBar.css">
 
-    <title>Document</title>
+    <title>Supprimer une pré-admission</title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
+
 </head>
 <body>
     <?php require_once('src/navbar.php'); ?>
 
     <form method="post">
-        <h1>Supprimer une préadmission</h1>
+        <h1>Supprimer une pré-admission</h1>
 
         <?php if($erreur != '') { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
 

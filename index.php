@@ -89,7 +89,9 @@
 
     <link rel="stylesheet" href="style/style.css">
 
-    <title>Connexion - Clinique LPF</title>
+    <title>Connexion | Clinique LPF</title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
+
 </head>
 <body>
     <main>

@@ -45,6 +45,8 @@
     <link rel="stylesheet" href="../style/voirAdmission.css">
 
     <title>Confirmer la suppression</title>
+    <link rel="icon" href="../img/logo.png" type="image/icon type">
+
 </head>
 <body>
     <?php require_once('src/navbar.php'); ?>
