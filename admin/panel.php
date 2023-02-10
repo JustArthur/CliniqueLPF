@@ -1,33 +1,57 @@
 <?php
     include_once('../include.php');
 
+    //-- Empêche la connexion si un utilisateur n'est pas connecté ----------------
     if(!isset($_SESSION['utilisateur'][5])) {
         header('Location: ../index');
         exit;
     }
 
+    $anneeChoix = date('Y');
+    $semChoix = date('W');
+
+    $timeStampPremierJanvier = strtotime($anneeChoix . '-01-01');
+    $jourPremierJanvier = date('w', $timeStampPremierJanvier);
+    
+    //-- Recherche du N° de semaine du 1er janvier -------------------
+    $numSemainePremierJanvier = date('W', $timeStampPremierJanvier);
+    
+    //-- Nombre à ajouter en fonction du numéro précédent ------------
+    $decallage = ($numSemainePremierJanvier == 1) ? $semChoix - 1 : $semChoix;
+
+    //-- Timestamp du jour dans la semaine recherchée ----------------
+    $timeStampDate = strtotime('+' . $decallage . 'weeks', $timeStampPremierJanvier);
+    
+    //-- Recherche du lundi de la semaine en fonction de la ligne précédente ---------
+    $jourDebutSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d', strtotime('last monday', $timeStampDate));
+    $jourFinSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d',strtotime(' sunday', $timeStampDate));
+
+
+    //-- Recherche de la date du jour ----------------
     $dateAujourdhui = date('Y-m-d');
 
-    $nbr_admission_today = $DB->prepare("SELECT * FROM operations WHERE dateOperation = ?");
-    $nbr_admission_today->execute([$dateAujourdhui]);
+    //-- Requête pour les admission ou autres ----------------
+    $nbr_admission_today = $DB->prepare("SELECT * FROM operations WHERE dateOperation >= ? AND dateOperation <= ?");
+    $nbr_admission_today->execute([$jourDebutSemaine, $jourFinSemaine]);
     $nbr_admission_today = $nbr_admission_today->rowcount();
 
     $nbr_patient_today = $DB->prepare("SELECT * FROM preadmission WHERE dateAdmission = ?");
     $nbr_patient_today->execute([$dateAujourdhui]);
     $nbr_patient_today = $nbr_patient_today->rowcount();
 
-    $nbr_annule_today = $DB->prepare("SELECT * FROM preadmission WHERE dateAdmission = ? AND status = 'Annulé'");
-    $nbr_annule_today->execute([$dateAujourdhui]);
+    $nbr_annule_today = $DB->prepare("SELECT p.idOperation, p.status, o.dateOperation FROM preadmission p INNER JOIN operations o ON p.idOperation = o.id WHERE p.status = 'Annulé' AND o.dateOperation >= ? AND o.dateOperation <= ?");
+    $nbr_annule_today->execute([$jourDebutSemaine, $jourFinSemaine]);
     $nbr_annule_today = $nbr_annule_today->rowcount();
 
-    $nbr_encours_today = $DB->prepare("SELECT * FROM preadmission WHERE dateAdmission = ? AND status = 'En cours'");
-    $nbr_encours_today->execute([$dateAujourdhui]);
+    $nbr_encours_today = $DB->prepare("SELECT p.idOperation, p.status, o.dateOperation FROM preadmission p INNER JOIN operations o ON p.idOperation = o.id WHERE p.status = 'En cours' AND o.dateOperation >= ? AND o.dateOperation <= ?");
+    $nbr_encours_today->execute([$jourDebutSemaine, $jourFinSemaine]);
     $nbr_encours_today = $nbr_encours_today->rowcount();
 
-    $nbr_termine_today = $DB->prepare("SELECT * FROM preadmission WHERE dateAdmission = ? AND status = 'Terminé'");
-    $nbr_termine_today->execute([$dateAujourdhui]);
+    $nbr_termine_today = $DB->prepare("SELECT p.idOperation, p.status, o.dateOperation FROM preadmission p INNER JOIN operations o ON p.idOperation = o.id WHERE p.status = 'Terminé' AND o.dateOperation >= ? AND o.dateOperation <= ?");
+    $nbr_termine_today->execute([$jourDebutSemaine, $jourFinSemaine]);
     $nbr_termine_today = $nbr_termine_today->rowcount();
 
+    //-- Esthetique du site si 0 ----------------
     if($nbr_admission_today == 0) {
         $nbr_admission_today = 'Aucune';
     } else {
@@ -58,6 +82,7 @@
         $nbr_encours_today = $nbr_encours_today;
     }
 
+    //-- Récupères les 20 dernières pré-admissions du jour ----------------
     $dernierePrea = $DB->prepare("SELECT * FROM preadmission WHERE faitPar = ? AND dateAdmission = ? LIMIT 20");
     $dernierePrea->execute([$_SESSION['utilisateur'][5], $dateAujourdhui]);
     $dernierePreaFetch = $dernierePrea->fetchAll();
@@ -87,7 +112,7 @@
         <ul class="list-prea">
             <a href="#" class="list-item">
                 <h3 class="titre">Pré-admissions</h3>
-                <p class="desc"><span class="color"><?= $nbr_admission_today ?></span> pré-admission au total prévu pour aujourd'hui.</p>
+                <p class="desc"><span class="color"><?= $nbr_admission_today ?></span> pré-admission prévu pour cette semaine.</p>
             </a>
 
             <a href="#" class="list-item">
@@ -97,17 +122,17 @@
 
             <a href="#" class="list-item">
                 <h3 class="titre">Annulé</h3>
-                <p class="desc"><span class="color"><?= $nbr_annule_today ?></span> pré-admissions annulé pour aujourd'hui.</p>
+                <p class="desc"><span class="color"><?= $nbr_annule_today ?></span> pré-admissions annulé pour cette semaine.</p>
             </a>
 
             <a href="#" class="list-item">
                 <h3 class="titre">En cours</h3>
-                <p class="desc"><span class="color"><?= $nbr_encours_today ?></span> pré-admissions en cours pour aujourd'hui.</p>
+                <p class="desc"><span class="color"><?= $nbr_encours_today ?></span> pré-admissions en cours pour cette semaine.</p>
             </a>
 
             <a href="#" class="list-item">
                 <h3 class="titre">Terminé</h3>
-                <p class="desc"><span class="color"><?= $nbr_termine_today ?></span> pré-admissions terminé pour aujourd'hui.</p>
+                <p class="desc"><span class="color"><?= $nbr_termine_today ?></span> pré-admissions terminé pour cette semaine.</p>
             </a>
 
             <a href="ajout_admission" class="list-item">

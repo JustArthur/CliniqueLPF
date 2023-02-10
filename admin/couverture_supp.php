@@ -173,7 +173,7 @@
                 </optgroup>
             </select>
 
-            <input type="submit" name="next" value="Je confirmer la suppression de cette pré-admission">
+            <input type="submit" name="next" value="Confirmer la suppression">
         </form>
     </main>
 </body>
