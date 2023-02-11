@@ -94,6 +94,24 @@ main .gauche .formulaire form input {
     font-size: 18px;
 }
 
+main .gauche .formulaire form input:invalid {
+    animation: shake 300ms;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(8px);
+    }
+
+    50% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
 main .gauche .formulaire form input[name='identifiant'] {
     border-bottom: none;
     border-radius: 10px 10px 0 0;

@@ -104,11 +104,11 @@
                 <?php if(isset($erreur)) { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
 
                 <form method="POST">
-                    <input type="text" name="identifiant" id="" placeholder="Votre identifiant">
-                    <input type="password" name="password" id="" placeholder="Votre mot de passe">
+                    <input type="text" name="identifiant" placeholder="Votre identifiant">
+                    <input type="password" name="password" placeholder="Votre mot de passe">
 
                     <div class="div_captcha">
-                        <input type="text" maxlength="4" minlength="1" name="reponse" id="" placeholder="Réponse au captcha">
+                        <input type="text" maxlength="4" minlength="1" name="reponse" pattern="[0-9]*" placeholder="Réponse au captcha">
                         <div class="chiffre">
                             <?= $_SESSION['captcha'] ?>
                         </div>
