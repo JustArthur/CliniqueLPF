@@ -58,7 +58,7 @@
 <ul class="list-prea">
     <a href="#" class="list-item">
         <h3 class="titre">Pré-admissions</h3>
-        <p class="desc"><span class="color"><?= $nbr_admission_week ?></span> pré-admission prévu pour cette semaine.</p>
+        <p class="desc"><span class="color"><?= $nbr_admission_week ?></span> pré-admissions prévu pour cette semaine.</p>
     </a>
 
     <a href="#" class="list-item">
@@ -68,17 +68,17 @@
 
     <a href="#" class="list-item">
         <h3 class="titre">Annulé</h3>
-        <p class="desc"><span class="color"><?= $nbr_annule_week ?></span> pré-admissions annulé pour cette semaine.</p>
+        <p class="desc"><span class="color"><?= $nbr_annule_week ?></span> pré-admissions annulées cette semaine.</p>
     </a>
 
     <a href="#" class="list-item">
         <h3 class="titre">En cours</h3>
-        <p class="desc"><span class="color"><?= $nbr_encours_week ?></span> pré-admissions en cours pour cette semaine.</p>
+        <p class="desc"><span class="color"><?= $nbr_encours_week ?></span> pré-admissions en cours cette semaine.</p>
     </a>
 
     <a href="#" class="list-item">
-        <h3 class="titre">Terminé</h3>
-        <p class="desc"><span class="color"><?= $nbr_termine_week ?></span> pré-admissions terminé pour cette semaine.</p>
+        <h3 class="titre">Terminée</h3>
+        <p class="desc"><span class="color"><?= $nbr_termine_week ?></span> pré-admissions terminées cette semaine.</p>
     </a>
 
     <a href="ajout_admission" class="list-item">

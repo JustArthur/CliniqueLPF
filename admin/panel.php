@@ -25,12 +25,13 @@
         false //4
     );
 
-    $date5sem = new DateTime(); // Crée un nouvel objet DateTime avec la date et l'heure actuelles
-    $date5sem->modify('+5 weeks'); // Ajoute 5 semaines à la date
-    $date5sem = $date5sem->format('Y-m-d'); // Affiche la date au format 'année-mois-jour'
-    echo $date5sem;
+    // -- Ajoute 5 semaines à la date d'aujourd'hui ----------------
+    $date5sem = new DateTime(); 
+    $date5sem->modify('+5 weeks');
+    $date5sem = $date5sem->format('Y-m-d');
 
 
+    // -- Défini l'anné et le numéro de la semaine pour calculer les informations de la semaines ----------------
     $anneeChoix = date('Y');
     $semChoix = date('W');
 
@@ -51,8 +52,8 @@
     $jourFinSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d',strtotime(' sunday', $timeStampDate));
 
     //-- Récupères les pré-admissions prévu pour les 5 semaines à venir ----------------
-    $dernierePrea = $DB->prepare("SELECT * FROM preadmission p INNER JOIN operations o ON p.idOperation  = o.id WHERE o.dateOperation > ? AND o.dateOperation < ? AND p.status != 'Annulé'");
-    $dernierePrea->execute([$jourDebutSemaine, $date5sem]);
+    $dernierePrea = $DB->prepare("SELECT * FROM preadmission p INNER JOIN operations o ON p.idOperation  = o.id WHERE o.dateOperation > ? AND o.dateOperation < ? AND p.status != 'Annulé' AND p.status != 'Terminé' AND p.idMedecin = ?");
+    $dernierePrea->execute([$jourDebutSemaine, $date5sem, $_SESSION['utilisateur'][5]]);
     $dernierePreaFetch = $dernierePrea->fetchAll();
     $dernierePreaCount = $dernierePrea->rowcount();
 ?>
