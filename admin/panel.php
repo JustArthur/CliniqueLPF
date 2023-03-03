@@ -25,9 +25,34 @@
         false //4
     );
 
+    $date5sem = new DateTime(); // Crée un nouvel objet DateTime avec la date et l'heure actuelles
+    $date5sem->modify('+5 weeks'); // Ajoute 5 semaines à la date
+    $date5sem = $date5sem->format('Y-m-d'); // Affiche la date au format 'année-mois-jour'
+    echo $date5sem;
+
+
+    $anneeChoix = date('Y');
+    $semChoix = date('W');
+
+    $timeStampPremierJanvier = strtotime($anneeChoix . '-01-01');
+    $jourPremierJanvier = date('w', $timeStampPremierJanvier);
+    
+    //-- Recherche du N° de semaine du 1er janvier -------------------
+    $numSemainePremierJanvier = date('W', $timeStampPremierJanvier);
+    
+    //-- Nombre à ajouter en fonction du numéro précédent ------------
+    $decallage = ($numSemainePremierJanvier == 1) ? $semChoix - 1 : $semChoix;
+
+    //-- Timestamp du jour dans la semaine recherchée ----------------
+    $timeStampDate = strtotime('+' . $decallage . 'weeks', $timeStampPremierJanvier);
+    
+    //-- Recherche du lundi de la semaine en fonction de la ligne précédente ---------
+    $jourDebutSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d', strtotime('last monday', $timeStampDate));
+    $jourFinSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d',strtotime(' sunday', $timeStampDate));
+
     //-- Récupères les pré-admissions prévu pour les 5 semaines à venir ----------------
-    $dernierePrea = $DB->prepare("SELECT * FROM preadmission WHERE faitPar = ? AND dateAdmission = ? LIMIT 20");
-    $dernierePrea->execute([$_SESSION['utilisateur'][5], $dateAujourdhui]);
+    $dernierePrea = $DB->prepare("SELECT * FROM preadmission p INNER JOIN operations o ON p.idOperation  = o.id WHERE o.dateOperation > ? AND o.dateOperation < ? AND p.status != 'Annulé'");
+    $dernierePrea->execute([$jourDebutSemaine, $date5sem]);
     $dernierePreaFetch = $dernierePrea->fetchAll();
     $dernierePreaCount = $dernierePrea->rowcount();
 ?>
@@ -77,10 +102,6 @@
                             </li>
                         <?php } else {
                             foreach($dernierePreaFetch as $preadmission) {
-                                $cherchePrea = $DB->prepare("SELECT * FROM operations WHERE idPatient = ?");
-                                $cherchePrea->execute([$preadmission['idPatient']]);
-                                $cherchePrea = $cherchePrea->fetch();
-
                                 $chercheMedecin = $DB->prepare("SELECT * FROM personnel WHERE id = ?");
                                 $chercheMedecin->execute([$preadmission['idMedecin']]);
                                 $chercheMedecin = $chercheMedecin->fetch();
@@ -90,8 +111,8 @@
                                     <div class="infos-prea">
                                         <p><?= $preadmission['idPatient'] ?></p>
                                         <p>Dr <?= $chercheMedecin['nom'] . ' ' . $chercheMedecin['prenom'] ?></p>
-                                        <p><?= $cherchePrea['dateOperation'] ?></p>
-                                        <p><?= $cherchePrea['heureOperation'] ?></p>
+                                        <p><?= $preadmission['dateOperation'] ?></p>
+                                        <p><?= $preadmission['heureOperation'] ?></p>
                                     </div>
 
                                     <div class="btns">

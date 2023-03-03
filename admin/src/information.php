@@ -1,24 +1,4 @@
 <?php
-    $anneeChoix = date('Y');
-    $semChoix = date('W');
-
-    $timeStampPremierJanvier = strtotime($anneeChoix . '-01-01');
-    $jourPremierJanvier = date('w', $timeStampPremierJanvier);
-    
-    //-- Recherche du N° de semaine du 1er janvier -------------------
-    $numSemainePremierJanvier = date('W', $timeStampPremierJanvier);
-    
-    //-- Nombre à ajouter en fonction du numéro précédent ------------
-    $decallage = ($numSemainePremierJanvier == 1) ? $semChoix - 1 : $semChoix;
-
-    //-- Timestamp du jour dans la semaine recherchée ----------------
-    $timeStampDate = strtotime('+' . $decallage . 'weeks', $timeStampPremierJanvier);
-    
-    //-- Recherche du lundi de la semaine en fonction de la ligne précédente ---------
-    $jourDebutSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d', strtotime('last monday', $timeStampDate));
-    $jourFinSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d',strtotime(' sunday', $timeStampDate));
-
-
     //-- Recherche de la date du jour ----------------
     $dateAujourdhui = date('Y-m-d');
 
