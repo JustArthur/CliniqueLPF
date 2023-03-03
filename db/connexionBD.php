@@ -5,7 +5,7 @@
     private $host    = 'localhost';    //nom de l'host  
     private $name    = 'Clinique';         //nom de la base de donnée
     private $user    = 'root';       //utilisateur
-    private $pass    = 'root';   //mot de passe de la BDD
+    private $pass    = '';   //mot de passe de la BDD
     private $connexion;
 
     
