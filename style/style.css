@@ -19,8 +19,8 @@ body {
 
 main {
     margin: auto;
-    height: 95%;
-    width: 97%;
+    height: 100%;
+    width: 100%;
     display: flex;
     gap: 20px;
 }
