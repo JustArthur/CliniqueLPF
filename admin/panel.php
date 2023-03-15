@@ -79,12 +79,9 @@
         localStorage.removeItem('errorSession');
     </script>
 
-    <?php
+    <?php 
         //-- Appel le fichier navbar ----------------
         require_once('src/navbar.php');
-
-        //-- Déconnecte l'utilisateur ----------------
-        require_once('src/expireConnexion.php');
     ?>
     
     <main>
