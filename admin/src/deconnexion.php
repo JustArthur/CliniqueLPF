@@ -18,6 +18,6 @@
 
     session_destroy();
 
-    header('Location: ../../index');
+    header('Location: ../../');
     exit;
 ?>
