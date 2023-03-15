@@ -102,7 +102,15 @@
             <div class="formulaire">
                 <h3>Connexion à votre compte</h3>
 
-                <?php if(isset($erreur)) { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
+                    <script>
+                        if(localStorage.getItem('errorSession') === '' || localStorage.getItem('errorSession') === null) {
+                            
+                        } else {
+                            document.write(`<div class="erreur">`, localStorage.getItem('errorSession'), `</div>`);
+                        }
+                    </script>
+                <?php if(isset($_POST['localStorageData'])) { ?><div class="erreur"><?= $_POST['localStorageData']; ?></div><?php }?>
+                <?php if(isset($erreur)) { ?><div class="erreur active"><?= $erreur ?></div><?php } ?>
 
                 <form method="POST">
                     <input type="text" name="identifiant" placeholder="Votre identifiant">

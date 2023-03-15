@@ -57,13 +57,13 @@
 
 <ul class="list-prea">
     <a href="#" class="list-item">
-        <h3 class="titre">Pré-admissions</h3>
-        <p class="desc"><span class="color"><?= $nbr_admission_week ?></span> pré-admissions prévu pour cette semaine.</p>
+        <h3 class="titre">Patients</h3>
+        <p class="desc"><span class="color"><?= $nbr_patient_week ?></span> patients admis pour une future pré-admission.</p>
     </a>
 
     <a href="#" class="list-item">
-        <h3 class="titre">Patients</h3>
-        <p class="desc"><span class="color"><?= $nbr_patient_week ?></span> patients admis pour une future pré-admission.</p>
+        <h3 class="titre">Pré-admissions</h3>
+        <p class="desc"><span class="color"><?= $nbr_admission_week ?></span> pré-admissions prévu pour cette semaine.</p>
     </a>
 
     <a href="#" class="list-item">

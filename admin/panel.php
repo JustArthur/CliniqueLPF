@@ -68,15 +68,23 @@
     <link rel="stylesheet" href="../style/panel.css">
     <link rel="stylesheet" href="../style/navBar.css">
 
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <title>Bienvenue, <?= $_SESSION['utilisateur'][0] . ' ' . $_SESSION['utilisateur'][1] ?></title>
 
     <link rel="icon" href="../img/logo.png" type="image/icon type">
 </head>
 <body>
+    <script>
+        localStorage.removeItem('errorSession');
+    </script>
 
     <?php
         //-- Appel le fichier navbar ----------------
         require_once('src/navbar.php');
+
+        //-- Déconnecte l'utilisateur ----------------
+        require_once('src/expireConnexion.php');
     ?>
     
     <main>
