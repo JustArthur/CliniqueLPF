@@ -133,5 +133,7 @@
 
         <input type="submit" name="chercheNumSecu" value="Rechercher le patient">
     </form>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

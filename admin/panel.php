@@ -129,13 +129,11 @@
                                     </div>
                                 </li>
                     <?php } } ?>
-
-                    <?php if($_SESSION['utilisateur'][3] == 2) {?>
-    
-                    <?php } ?>
                 </ul>
             </div>
         </div>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

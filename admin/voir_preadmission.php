@@ -94,5 +94,6 @@
         </ul>
     </main>
     
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

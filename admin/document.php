@@ -253,5 +253,7 @@
             <input type="submit" name="finish" value="Ajouter la pré-admission pour <?= $_SESSION['patient'][4] . ' ' . $_SESSION['patient'][2] ?>">
         </form>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

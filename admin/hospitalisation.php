@@ -98,5 +98,7 @@
             <input type="submit" name="next" value="Continuer">
         </form>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

@@ -27,6 +27,8 @@
             </select>
             <button name="ajouter">Ajouter</button>
         </form>
+
+        <script src="js/expireConnexion.js"></script>
     </body>
     <?php
     if (isset($_POST['ajouter'])) {

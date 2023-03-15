@@ -178,5 +178,7 @@
             <input type="submit" name="next" value="Confirmer la suppression">
         </form>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

@@ -61,5 +61,7 @@
             </div>
         </form>
     </div>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

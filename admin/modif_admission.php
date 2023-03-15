@@ -136,5 +136,7 @@
             <input type="submit" name="next" value="Modifier les informations">
         </form>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

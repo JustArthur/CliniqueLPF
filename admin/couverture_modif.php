@@ -199,5 +199,7 @@
             <input type="submit" name="next" value="Modifier la préadmission de <?= $nomPrenom['nomNaissance'] . ' ' . $nomPrenom['prenom']?>">
         </form>
     </main>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>

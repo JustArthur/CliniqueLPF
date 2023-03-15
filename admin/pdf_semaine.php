@@ -35,5 +35,7 @@
 
         <input type="submit" name="next" value="Générer le pdf">
     </form>
+
+    <script src="js/expireConnexion.js"></script>
 </body>
 </html>
