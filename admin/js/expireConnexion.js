@@ -1,5 +1,5 @@
 // Temps avant rafraîchissement en secondes ----------------
-var refresh_time = 5;
+var refresh_time = 300;
 
 //-- fonction qui reset le timer ----------------
 function resetTimer() {
