@@ -113,7 +113,7 @@
                                 $chercheMedecin->execute([$preadmission['idMedecin']]);
                                 $chercheMedecin = $chercheMedecin->fetch();
 
-                                $select_prea = $DB->prepare('SELECT * from preadmission INNER JOIN operations on preadmission.idOperation = operations.id INNER JOIN patient on preadmission.idPatient = patient.numSecu where preadmission.id = ? order by operations.dateOperation');
+                                $select_prea = $DB->prepare('SELECT * from preadmission INNER JOIN operations on preadmission.idOperation = operations.id INNER JOIN patient on preadmission.idPatient = patient.numSecu where preadmission.id = ? order by operations.dateOperation and preadmission.status = "En cours";');
                                 $select_prea->execute([$preadmission['id']]);
                                 $select_prea = $select_prea->fetch();
                             
