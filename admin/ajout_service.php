@@ -21,10 +21,6 @@
             <label for="service">service</label>
             <input name="service" type="text" required>
             <label for="role">role</label>
-
-            <select name="" id="">
-                <option value=1>Secretaire</option>
-            </select>
             <button name="ajouter">Ajouter</button>
         </form>
 
