@@ -122,7 +122,7 @@
                                     </div>
 
                                     <div class="btns">
-                                        <a href="modif_admission?id=<?= $preadmission['id']?>">Modifier</a>
+                                        <a href="preadmissionMedecin?id=<?= $preadmission['id']?>">Voir pré-admission</a>
                                     </div>
                                 </li>
                     <?php } } ?>

@@ -62,6 +62,10 @@
             if(isset($assure) != 0 && isset($ald) != 0 && isset($chambre) != 0) {
                 $bool = $_SESSION['couvertureSociale'][7];
 
+                $select_chambre = $DB->prepare('SELECT chambre.id from chambre inner join typechambre on chambre.idType = typechambre.id where chambre.libre != 0 and where typechambre.id = ?');
+                $select_chambre->execute([$chambre]);
+                $idChambre = $select_chambre->fetch();
+
                 $_SESSION['couvertureSociale'] = array(
                     $_SESSION['patient'][0], //0
                     $organisme, //1
@@ -69,7 +73,7 @@
                     $ald, //3
                     $nomMutuelle, //4
                     $numAdherent, //5
-                    $chambre, //6
+                    $idChambre, //6
                     $bool //7
                 );
 
