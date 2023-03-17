@@ -10,6 +10,8 @@
                     <li><a href="num_secu_supp">Supprimer une pré-admision</a></li>
                 </ul>
             </li>
+
+            <li><a href="pdf_semaine">Créer un PDF</a></li>
         <?php } ?>
 
         <?php if($_SESSION['utilisateur'][3] == 2) { ?>

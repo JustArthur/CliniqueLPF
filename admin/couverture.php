@@ -60,34 +60,40 @@
         if(isset($_POST['next'])) {
 
             if(isset($assure) != 0 && isset($ald) != 0 && isset($chambre) != 0) {
-                $bool = $_SESSION['couvertureSociale'][7];
+                $bool = $_SESSION['couvertureSociale'][6];
 
-                $select_chambre = $DB->prepare('SELECT chambre.id from chambre inner join typechambre on chambre.idType = typechambre.id where chambre.libre != 0 and where typechambre.id = ?');
+                $select_chambre = $DB->prepare('SELECT chambre.id from chambre inner join typechambre on chambre.idType = typechambre.id where typechambre.id = ? AND chambre.nbrPlaces != 0');
                 $select_chambre->execute([$chambre]);
                 $idChambre = $select_chambre->fetch();
 
-                $_SESSION['couvertureSociale'] = array(
-                    $_SESSION['patient'][0], //0
-                    $organisme, //1
-                    $assure, //2
-                    $ald, //3
-                    $nomMutuelle, //4
-                    $numAdherent, //5
-                    $idChambre, //6
-                    $bool //7
-                );
-
-                $_SESSION['creer_admission'] = array(
-                    true, //0
-                    true, //1
-                    true, //2
-                    true, //3
-                    true //4
-                );
-
-
-                header('Location: document');
-                exit;
+                if($idChambre) {
+                    $_SESSION['couvertureSociale'] = array(
+                        $_SESSION['patient'][0], //0
+                        $organisme, //1
+                        $assure, //2
+                        $ald, //3
+                        $nomMutuelle, //4
+                        $numAdherent, //5
+                        $idChambre['id'], //6
+                        $bool //7
+                    );
+    
+                    $_SESSION['creer_admission'] = array(
+                        true, //0
+                        true, //1
+                        true, //2
+                        true, //3
+                        true //4
+                    );
+    
+                    $update_chambre = $DB->prepare('UPDATE chambre SET nbrPlaces = nbrPlaces - 1 WHERE id = ?;');
+                    $update_chambre->execute([$_SESSION['couvertureSociale'][6]]);
+    
+                    header('Location: document');
+                    exit;
+                } else {
+                    $erreur = "Plus aucune chambre disponible.";
+                }
 
             } else {
                 $erreur = "Certain champs n'ont pas été remplis correctement.";
@@ -118,6 +124,7 @@
     <main>
         <h2>Couverture sociale du patient</h2>
         <form method="post">
+            <?php if($erreur != '') { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
             <input required type="text" name="organisme" value="<?= $_SESSION['couvertureSociale'][1] ?>" id="" placeholder="Organisme de sécurité sociale / Nom de la caisse d'assurance maladie">
 
             <input required type="text" name="numSecuConfirm" disabled style="cursor: not-allowed;" value="<?= $_SESSION['couvertureSociale'][0] ?>" id="" placeholder="Numero de sécurité sociale">

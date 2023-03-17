@@ -46,9 +46,11 @@
                     }
                 } else {
                     $valid = false;
+                    $erreur = 'Mauvais format de fichier';
                 }
             } else {
                 $valid = false;
+                $erreur = 'Le livret de famille n\'est pas renseigné';
             }
         } else {
             $livretFamille = '';
@@ -89,11 +91,11 @@
                     $valid = false;
                 }
             } else { 
-                $erreur = 'Erreur images 2';
+                $erreur = 'Un ou plusieurs fichier n\'ont pas la bonne extension';
                 $valid = false;
             }
         } else {
-            $erreur ='Erreur images 1';
+            $erreur ='Tout les fichiers n\'ont pas été rensigné';
             $valid = false;
         }
 
