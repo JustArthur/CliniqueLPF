@@ -87,7 +87,7 @@
                 if(is_readable($chemin_CNI) && is_readable($chemin_CarteVitale) && is_readable($chemin_CarteMutuelle)) {
                     $valid = true;
                 } else{
-                    $erreur = 'Erreur images 3';
+                    $erreur = 'Chemin introuvable, contacter votre DSI';
                     $valid = false;
                 }
             } else { 
@@ -95,7 +95,7 @@
                 $valid = false;
             }
         } else {
-            $erreur ='Tout les fichiers n\'ont pas été rensigné';
+            $erreur ='Un ou plusieurs fichiers n\'ont pas été rensigné';
             $valid = false;
         }
 
@@ -186,7 +186,7 @@
             $insertPreadmission = $DB->prepare("INSERT INTO preadmission (idPatient, idMedecin, idOperation, idChambre, dateAdmission, faitPar) VALUES(?, ?, ?, ?, ?, ?);");
             $insertPreadmission->execute([$_SESSION['patient'][0], $_SESSION['hospitalisation'][3], $selectOperationId['id'], $_SESSION['couvertureSociale'][6], $dateAujourdhui, $_SESSION['utilisateur'][5]]);
 
-            $textLog = "Création d'une nouvelle préadmission";
+            $textLog = "Création d'une nouvelle préadmission pour " . $_SESSION['patient'][0];
             $dateLog = date('Y-m-d H:i');
         
             $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");

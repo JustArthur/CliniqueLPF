@@ -102,9 +102,9 @@
             $suppAdmission = $DB->prepare("UPDATE preadmission SET status='Annulé' WHERE id = ?");
             $suppAdmission->execute([$_SESSION['preadmission'][0]]);
 
-            $textLog = "Modification d'une pré-admission";
+            $textLog = "Suppression d'une préadmission pour " . $_SESSION['patient'][0];
             $dateLog = date('Y-m-d H:i');
-
+        
             $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
             $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
 

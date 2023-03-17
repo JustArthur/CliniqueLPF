@@ -1,6 +1,4 @@
 <?php
-    error_reporting(E_ALL);
-    ini_set("display_errors", 1);
     include_once('include.php');
 
     if(isset($_SESSION['utilisateur'][5])) {
@@ -69,7 +67,7 @@
                         $erreur = "Les champs identifiant et mot de passe sont vides.";
                     }
                 } else {
-                    $erreur = 'La réponse au captcha incorrect.';
+                    $erreur = 'La réponse au captcha est incorrect.';
                 }
             } else {
                 $erreur = "Certains champs sont vides.";
