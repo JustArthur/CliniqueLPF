@@ -148,9 +148,15 @@
                                     <div class="btns">
                                         <a style="background: red;" href="changeStatut?id=<?= $preadmission['id']?>">Clôturer la pré-admission</a>
                                     </div>
-                                    <?php } else { ?>
-                                        <div class="btns">
+
+                                    <?php } else if($preadmission['dateOperation'] == $dateAujourdhui) { ?>
+                                    <div class="btns">
                                         <a style="background: #00A3FE;" href="changeStatut?id=<?= $preadmission['id']?>">Prendre en charge</a>
+                                    </div>
+
+                                    <?php } else { ?>
+                                    <div class="btns">
+                                        <a style="background: black; cursor: not-allowed;" href="">Pas encore disponible</a>
                                     </div>
                                     <?php } ?>
                                 </li>
