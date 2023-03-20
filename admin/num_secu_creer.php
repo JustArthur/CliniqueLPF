@@ -2,7 +2,7 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 
@@ -82,7 +82,7 @@
                         false //4
                     );
 
-                    header('Location: ajout_admission');
+                    header('Location: ajout_admission.php');
                     exit;
 
                 } else {
@@ -96,7 +96,7 @@
                         false //4
                     );
 
-                    header('Location: ajout_admission');
+                    header('Location: ajout_admission.php');
                     exit;
                 }
             } else {

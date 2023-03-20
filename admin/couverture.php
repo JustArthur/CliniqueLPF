@@ -2,12 +2,12 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 
     if($_SESSION['creer_admission'][0] != true && $_SESSION['creer_admission'][1] != true && $_SESSION['creer_admission'][2] != true && $_SESSION['creer_admission'][3] != true) {
-        header('Location: num_secu_creer');
+        header('Location: num_secu_creer.php');
         exit;
     }
 
@@ -91,7 +91,7 @@
                     $update_chambre = $DB->prepare('UPDATE chambre SET nbrPlaces = nbrPlaces - 1 WHERE id = ?;');
                     $update_chambre->execute([$_SESSION['couvertureSociale'][6]]);
     
-                    header('Location: document');
+                    header('Location: document.php');
                     exit;
                 } else {
                     $erreur = "Plus aucune chambre disponible.";

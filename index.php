@@ -2,7 +2,7 @@
     include_once('include.php');
 
     if(isset($_SESSION['utilisateur'][5])) {
-        header('Location: admin/panel');
+        header('Location: admin/panel.php');
         exit;
     }
 
@@ -57,7 +57,7 @@
                             $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
                             $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
             
-                            header("Location: admin/panel");
+                            header("Location: admin/panel.php");
                             exit();
             
                         } else {

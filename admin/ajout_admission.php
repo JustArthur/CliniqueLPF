@@ -2,12 +2,12 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 
     if($_SESSION['creer_admission'][0] != true) {
-        header('Location: num_secu_creer');
+        header('Location: num_secu_creer.php');
         exit;
     }
 
@@ -77,7 +77,7 @@
                     false //4 
                 );
     
-                header('Location: contact_patient');
+                header('Location: contact_patient.php');
                 exit;
             } else {
                 $erreur = 'Veillez choisir le sexe du patient.';

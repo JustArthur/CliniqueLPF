@@ -2,7 +2,7 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 
@@ -124,11 +124,11 @@
                     $modifCouverture = $DB->prepare("UPDATE preadmission SET idChambre = ? WHERE id = ?");
                     $modifCouverture->execute([$_SESSION['couvertureSociale'][6], $_SESSION['preadmission'][0]]);
 
-                    header('Location: num_secu_modif');
+                    header('Location: num_secu_modif.php');
                     exit;
                 }
 
-                header('Location: num_secu_modif');
+                header('Location: num_secu_modif.php');
                 exit;
 
             } else {

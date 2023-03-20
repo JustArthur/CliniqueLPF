@@ -2,7 +2,7 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 2) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 ?>

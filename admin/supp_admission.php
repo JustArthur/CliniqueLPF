@@ -2,7 +2,7 @@
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
-        header('Location: panel');
+        header('Location: panel.php');
         exit;
     }
 
@@ -71,7 +71,7 @@
         extract($_POST);
 
         if(isset($_POST['next'])) {
-            header('Location: couverture_supp');
+            header('Location: couverture_supp.php');
             exit;
 
         }

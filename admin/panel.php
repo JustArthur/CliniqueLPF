@@ -3,7 +3,7 @@
 
     //-- Empêche la connexion si un utilisateur n'est pas connecté ----------------
     if(empty($_SESSION['utilisateur'][5])) {
-        header('Location: src/deconexion');
+        header('Location: src/deconexion.php');
         exit;
     }
 
