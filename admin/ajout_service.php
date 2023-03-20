@@ -1,6 +1,14 @@
 <?php
     include_once('../include.php');
 
+    if(!isset($_SESSION['utilisateur'][5])) {
+        if($_SESSION['utilisateur'][3] != 2) {
+            header('Location: panel');
+            exit;
+        }
+    }
+
+    echo $_SESSION['utilisateur'][3];
 ?>
 
 <html>

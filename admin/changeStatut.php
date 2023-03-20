@@ -1,6 +1,8 @@
 <?php 
     include_once('../include.php');
 
+    
+
     $statut = $DB->prepare('SELECT status FROM preadmission WHERE id = ?');
     $statut->execute([$_GET['id']]);
     $statut = $statut->fetch();
