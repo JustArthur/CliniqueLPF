@@ -2,8 +2,8 @@
     include_once('../include.php');
 
     //-- Empêche la connexion si un utilisateur n'est pas connecté ----------------
-    if(!isset($_SESSION['utilisateur'][5])) {
-        header('Location: ../index');
+    if(empty($_SESSION['utilisateur'][5])) {
+        header('Location: panel');
         exit;
     }
 
