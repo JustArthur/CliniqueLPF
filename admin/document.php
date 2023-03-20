@@ -247,7 +247,7 @@
 
             <?php if($_SESSION['patient'][12]) { ?>
             <label for="livretFamille">
-                Livret de famille (si le patient est mineur)
+                Livret de famille
                 <input type="file" name="livretFamille" id="">
             </label>
             <?php } ?>

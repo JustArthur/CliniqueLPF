@@ -122,6 +122,8 @@ main form input[type='file'] {
     outline: none;
     font-weight: 400;
     font-size: 18px;
+    width: max-content;
+    cursor: pointer;
 }
 
 main form input[name='next'],

@@ -3,7 +3,7 @@
 
     //-- Empêche la connexion si un utilisateur n'est pas connecté ----------------
     if(empty($_SESSION['utilisateur'][5])) {
-        header('Location: panel');
+        header('Location: src/deconexion');
         exit;
     }
 
@@ -52,7 +52,7 @@
     $jourFinSemaine = ($jourPremierJanvier == 1) ? date('Y-m-d', $timeStampDate) : date('Y-m-d',strtotime(' sunday', $timeStampDate));
 
     //-- Récupères les pré-admissions prévu pour les 5 semaines à venir ----------------
-    $dernierePrea = $DB->prepare("SELECT * FROM preadmission p INNER JOIN operations o ON p.idOperation  = o.id WHERE o.dateOperation > ? AND o.dateOperation < ? AND p.status != 'Annulé' AND p.status != 'Terminé' AND p.idMedecin = ?");
+    $dernierePrea = $DB->prepare("SELECT * FROM preadmission p INNER JOIN operations o ON p.idOperation  = o.id WHERE o.dateOperation >= ? AND o.dateOperation <= ? AND p.status != 'Annulé' AND p.status != 'Terminé' AND p.idMedecin = ?");
     $dernierePrea->execute([$jourDebutSemaine, $date5sem, $_SESSION['utilisateur'][5]]);
     $dernierePreaFetch = $dernierePrea->fetchAll();
     $dernierePreaCount = $dernierePrea->rowcount();

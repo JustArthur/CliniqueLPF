@@ -153,13 +153,13 @@
                 <option hidden value=0 > Chambre particulière ?</option>
 
                 <optgroup label="Avec équipements">
-                    <option value=1>Chambre seul</option>
-                    <option value=2>Chambre partager</option>
+                    <option value=1>Chambre seul avec équipements</option>
+                    <option value=2>Chambre partager avec équipements</option>
                 </optgroup>
 
                 <optgroup label="Sans équipements">
-                    <option value=3>Chambre seul</option>
-                    <option value=4>Chambre partager</option>
+                    <option value=3>Chambre seul sans équipements</option>
+                    <option value=4>Chambre partager sans équipements</option>
                 </optgroup>
             </select>
 

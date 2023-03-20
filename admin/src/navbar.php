@@ -25,7 +25,7 @@
 
             <li><a href="voir_service">Service</a>
                 <ul class="dropdown">
-                    <li><a href="#">Ajouter un service</a></li>
+                    <li><a href="ajout_service">Ajouter un service</a></li>
                     <li><a href="#">Modifier un service</a></li>
                     <li><a href="#">Supprimer un service</a></li>
                 </ul>
