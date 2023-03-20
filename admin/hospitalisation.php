@@ -16,10 +16,6 @@
     $dateMin = date('Y-m-d', time());
     $erreur = '';
 
-    $docteur = $DB->prepare("SELECT * FROM personnel WHERE role = 3");
-    $docteur->execute();
-    $docteur = $docteur->fetchAll();
-
     if(!empty($_POST)) {
         extract($_POST);
 
@@ -48,6 +44,10 @@
             }
         }
     }
+
+    $docteur = $DB->prepare("SELECT * FROM personnel WHERE role = 3");
+    $docteur->execute();
+    $docteur = $docteur->fetchAll();
 ?>
 
 <!DOCTYPE html>

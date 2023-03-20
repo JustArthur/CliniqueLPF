@@ -11,6 +11,8 @@
         exit;
     }
 
+    $erreur = '';
+
     $couverture = $DB->prepare("SELECT * FROM couverture WHERE numSecu = ?");
     $couverture->execute([$_SESSION['patient'][0]]);
     $couverture = $couverture->fetch();

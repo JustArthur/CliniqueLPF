@@ -64,7 +64,7 @@
                     $codePostal, //7
                     $ville, //8
                     $email, //9
-                    $telephone, //10
+                    '0'.$telephone, //10
                     $bool, //11
                     $mineur //12
                 );
@@ -113,7 +113,7 @@
 
             <?php if($erreur != '') { ?><div class="erreur"><?= $erreur ?></div><?php } ?>
 
-            <input required disabled style="cursor: not-allowed;" type="text" name="" value="<?= $_SESSION['patient'][0] ?>" placeholder="Numéro de sécurité sociale">
+            <input required disabled style="cursor: not-allowed; border-radius: 10px 10px 0 0;" type="text" name="" value="<?= $_SESSION['patient'][0] ?>" placeholder="Numéro de sécurité sociale">
 
             <select required name="civilite" id="">
                 <option hidden value="none">Sexe du patient</option>
