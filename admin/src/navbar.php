@@ -15,21 +15,8 @@
         <?php } ?>
 
         <?php if($_SESSION['utilisateur'][3] == 2) { ?>
-            <li><a href="voir_personnel">Personnel</a>
-                <ul class="dropdown">
-                    <li><a href="#">Ajouter un personnel</a></li>
-                    <li><a href="#">Modifier un personnel</a></li>
-                    <li><a href="supprPersonnel.php">Supprimer un personnel</a></li>
-                </ul>
-            </li>
-
-            <li><a href="voir_service">Service</a>
-                <ul class="dropdown">
-                    <li><a href="ajout_service.php">Ajouter un service</a></li>
-                    <li><a href="#">Modifier un service</a></li>
-                    <li><a href="#">Supprimer un service</a></li>
-                </ul>
-            </li>
+            <li><a href="ajout_service.php">Personels</a></li>
+            <li><a href="ajout_service.php">Services</a></li>
         <?php } ?>
 
         <li><a href="statistique.php">Statistiques</a></li>
