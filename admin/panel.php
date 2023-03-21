@@ -3,7 +3,14 @@
 
     //-- Empêche la connexion si un utilisateur n'est pas connecté ----------------
     if(empty($_SESSION['utilisateur'][5])) {
-        header('Location: src/deconexion.php');
+
+        $textLog = "Tentative de connexion forcé par le lien URL";
+        $dateLog = date('Y-m-d H:i');
+                            
+        $log = $DB->prepare("INSERT INTO log (idUser, nomLog, dateTimeLog) VALUES(?, ?, ?);");
+        $log->execute([$_SESSION['utilisateur'][5], $textLog, $dateLog]);
+                                
+        header('Location: src/deconnexion.php');
         exit;
     }
 
