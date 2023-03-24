@@ -5,12 +5,12 @@
         header('Location: panel.php');
         exit;
     }
-    
+
+    $dateMin = date('Y-m-d');
+
     $service = $DB->prepare("SELECT DISTINCT(service) FROM personnel WHERE service != 'Aucun'");
     $service->execute();
     $service = $service->fetchAll();
-
-    $dateMin = date('Y-m-d');
 ?>
 
 <!DOCTYPE html>
@@ -31,19 +31,19 @@
     <?php
         require_once('src/navbar.php');
     ?>
-    <form action="class/classPDF.php" method="post" class="formulaire">
+    <form method="post" action="class/createPDF.php" class="formulaire">
         <h2>Générer un PDF</h2>
 
         <label for="service">Choisir un service</label>
         <select name="service">
-            <option value="null" hidden>Choisir un service</option>
+            <option value="aucun" hidden>Choisir un service</option>
             <?php foreach($service as $services) {?>
             <option value="<?= $services['service'] ?>"><?= $services['service'] ?></option>
             <?php } ?>
         </select>
 
         <label for="dateSemaine">Choisir le jour de la semaine</label>
-        <input type="date" name="dateSemaine" min="<?= $dateMin ?>">
+        <input type="date" require name="dateSemaine" min="<?= $dateMin ?>">
 
         <input type="submit" name="next" value="Générer le pdf">
     </form>
