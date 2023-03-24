@@ -144,6 +144,8 @@
     </main>
 
     <script>
+
+        //-- Pour la compatibilité KeyPass et éviter le enter du submit ----------------
         document.getElementById('formulaire').addEventListener('keydown', function(event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
