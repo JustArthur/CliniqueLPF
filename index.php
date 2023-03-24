@@ -124,7 +124,7 @@
                 <?php if(isset($_POST['localStorageData'])) { ?><div class="erreur"><?= $_POST['localStorageData']; ?></div><?php }?>
                 <?php if(isset($erreur)) { ?><div class="erreur active"><?= $erreur ?></div><?php } ?>
 
-                <form method="POST">
+                <form method="POST" id="formulaire">
                     <input type="text" name="identifiant" placeholder="Votre identifiant">
                     <input type="password" name="password" placeholder="Votre mot de passe">
 
@@ -142,5 +142,13 @@
 
         <div class="droite"></div>
     </main>
+
+    <script>
+        document.getElementById('formulaire').addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+            }
+        });
+    </script>
 </body>
 </html>
