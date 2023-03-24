@@ -167,11 +167,14 @@
             } else {
                 $pdf->Cell(0, 10, 'Aucune préadmission dans la semaine du ' . $_POST['dateSemaine'], 0, 1, 'C');
             }
+
             
             // Enregistrez et affichez votre PDF
             $pdf->Output('formulaire.pdf', 'I');
         }
     }
+
+
 
     // Utilise la classe pour générer un PDF
     $generator = new MyPDFGenerator();
