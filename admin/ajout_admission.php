@@ -14,17 +14,6 @@
     $dateMax = date('Y-m-d', time());
 
     $erreur = '';
-
-    if($_SESSION['patient'][1] == "Homme") {
-        $homme = 'selected';
-        $femme = '';
-    } elseif($_SESSION['patient'][1] == "Femme") {
-        $homme = '';
-        $femme = 'selected';
-    } else {
-        $homme = '';
-        $femme = '';
-    }
     
     if(!empty($_POST)) {
         extract($_POST);
@@ -83,6 +72,23 @@
                 $erreur = 'Veillez choisir le sexe du patient.';
             }            
         }
+    }
+
+    switch($_SESSION['patient'][1]) {
+        case 'Homme':
+            $homme = 'selected';
+            $femme = '';
+        break;
+
+        case 'Femme':
+            $homme = '';
+            $femme = 'selected';
+        break;
+
+        default:
+            $homme = '';
+            $femme = '';
+        break;
     }
 ?>
 
