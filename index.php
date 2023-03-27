@@ -125,11 +125,11 @@
                 <?php if(isset($erreur)) { ?><div class="erreur active"><?= $erreur ?></div><?php } ?>
 
                 <form method="POST" id="formulaire">
-                    <input type="text" name="identifiant" placeholder="Votre identifiant">
-                    <input type="password" name="password" placeholder="Votre mot de passe">
+                    <input type="text" id="input" name="identifiant" placeholder="Votre identifiant">
+                    <input type="password" id="input" name="password" placeholder="Votre mot de passe">
 
                     <div class="div_captcha">
-                        <input type="text" maxlength="4" minlength="1" name="reponse" pattern="[0-9]*" placeholder="Réponse au captcha">
+                        <input type="text" maxlength="4" minlength="1" name="reponse" id="input" pattern="[0-9]*" placeholder="Réponse au captcha">
                         <div class="chiffre">
                             <?= $_SESSION['captcha'] ?>
                         </div>
@@ -144,9 +144,9 @@
     </main>
 
     <script>
-
+        const form = document.getElementById('formulaire');
         //-- Pour la compatibilité KeyPass et éviter le enter du submit ----------------
-        document.getElementById('formulaire').addEventListener('keydown', function(event) {
+        form.addEventListener('keydown', function(event) {
             if (event.keyCode === 13) {
                 event.preventDefault();
             }

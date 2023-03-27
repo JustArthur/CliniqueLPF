@@ -8,7 +8,7 @@
 
     $dateMin = date('Y-m-d');
 
-    $service = $DB->prepare("SELECT DISTINCT(service) FROM personnel WHERE service != 'Aucun'");
+    $service = $DB->prepare("SELECT DISTINCT(service) FROM personnel WHERE service != 'Administrateur' AND service != 'Administratrice' AND service != 'Secretaire' AND service != 'Aucun'");
     $service->execute();
     $service = $service->fetchAll();
 ?>
@@ -32,7 +32,7 @@
         require_once('src/navbar.php');
     ?>
     <form method="post" action="class/createPDF.php" class="formulaire">
-        <h2>Générer un PDF</h2>
+        <h2>Générer un PDF</h2><br><br>
 
         <label for="service">Choisir un service</label>
         <select name="service">
@@ -40,7 +40,7 @@
             <?php foreach($service as $services) {?>
             <option value="<?= $services['service'] ?>"><?= $services['service'] ?></option>
             <?php } ?>
-        </select>
+        </select><br><br>
 
         <label for="dateSemaine">Choisir le jour de la semaine</label>
         <input type="date" require name="dateSemaine" min="<?= $dateMin ?>">
