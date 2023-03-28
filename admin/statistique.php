@@ -15,9 +15,9 @@
     <link rel="stylesheet" href="../style/navBar.css">
 </head>
 <body>
-  <?php
-    require_once('src/navbar.php');
-  ?>
+<?php
+        require_once('src/navbar.php');
+    ?>
 <div>
     <div>
     <canvas id="myChartPersonelle"></canvas>
@@ -100,7 +100,7 @@
       }
     });
     </script>
-    <select name="nomOperation" id="nomOperation">
+    <select name="nomOperation">
     <?php
       $reponse = $DB->query('SELECT   DISTINCT nomOperation FROM operations');
       while($donnees = $reponse->fetch()){
@@ -151,7 +151,7 @@
       }
     });
     </script>
-     <select name="dateOperation" id="dateOperation">
+     <select name="dateOperation">
     <?php
       $reponse = $DB->query('SELECT  DISTINCT YEAR(dateOperation) FROM operations');
       while($donnees = $reponse->fetch()){
@@ -201,5 +201,6 @@
       }
     });
     </script>
+    <script src="js/expireConnexion.js"></script>
   </body> 
 </html>
