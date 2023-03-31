@@ -1,4 +1,6 @@
 <?php
+    error_reporting(E_ALL);
+    ini_set("display_errors", 1);
     include_once('../include.php');
 
     if(empty($_SESSION['utilisateur'][5]) || $_SESSION['utilisateur'][3] != 1) {
