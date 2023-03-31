@@ -1,5 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
+:root {
+    --h1-font-size: 3rem;
+    --h2-font-size: 2rem;
+    --h3-font-size: 1.5rem;
+
+    --p-font-size: 1rem;
+
+    --input-font-size: .8rem;
+}
+
+
 * {
     margin: 0;
     padding: 0;
@@ -18,7 +30,6 @@ body {
 }
 
 main {
-    margin: auto;
     height: 100%;
     width: 100%;
     display: flex;
@@ -37,7 +48,7 @@ main .gauche {
 
 main .gauche h1 {
     font-weight: 700;
-    font-size: 50px;
+    font-size: var(--h1-font-size);
     color: #000000;
     text-align: center;
 }
@@ -59,7 +70,7 @@ main .gauche .formulaire .erreur {
     height: 50px;
     background-color: #ff000080;
     color: #000000;
-    font-size: 20px;
+    font-size: var(--p-font-size);
     border: 2px solid #FF0000;
     border-radius: 10px;
     display: flex;
@@ -69,7 +80,7 @@ main .gauche .formulaire .erreur {
 
 main .gauche .formulaire h3 {
     font-weight: 500;
-    font-size: 25px;
+    font-size: var(--h3-font-size);
     line-height: 30px;
     color: #000000;
     text-align: center;
@@ -91,7 +102,7 @@ main .gauche .formulaire form input {
     transition: all 300ms ease;
     outline: 0 solid #fe5900;
     font-weight: 400;
-    font-size: 18px;
+    font-size: var(--input-font-size);
 }
 
 main .gauche .formulaire form input:invalid {
@@ -135,7 +146,7 @@ main .gauche .formulaire form input[name='connexion'] {
     cursor: pointer;
     box-shadow: 10px 10px 60px rgba(0, 0, 0, 0.25);
     font-weight: 800;
-    font-size: 25px;
+    font-size: var(--h2-font-size);
     line-height: 30px;
     color: #FFFFFF;
     transition: all 500ms ease;
@@ -169,6 +180,7 @@ main .gauche .formulaire .div_captcha .chiffre {
     z-index: 3;
     text-decoration: line-through 2px black;
     font-weight: 500;
+    font-size: var(--p-font-size);
 }
 
 
@@ -193,6 +205,16 @@ main .droite {
         background: linear-gradient(0deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url(../img/fond.jpg);
         background-size: cover;
         background-position: center;
+    }
+
+    :root {
+        --h1-font-size: 2rem;
+        --h2-font-size: 1rem;
+        --h3-font-size: .8rem;
+    
+        --p-font-size: .8rem;
+    
+        --input-font-size: .7rem;
     }
 
     main .gauche {
