@@ -4,8 +4,8 @@
 
     private $host    = 'localhost';    //nom de l'host  
     private $name    = 'cliniquelpf';         //nom de la base de donnée
-    private $user    = 'slam';       //utilisateur
-    private $pass    = 'sio2021';   //mot de passe de la BDD
+    private $user    = 'root';       //utilisateur
+    private $pass    = '';   //mot de passe de la BDD
     private $connexion;
 
     

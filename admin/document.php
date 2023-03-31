@@ -69,7 +69,7 @@
 
             if(in_array($upload_CNI, $extensionValides) && in_array($upload_CarteVitale, $extensionValides) && in_array($upload_CarteMutuelle, $extensionValides)) {
 
-                $dossier = 'patients/docs/' . $_SESSION['patient'][0];
+                $dossier = './patients/docs/' . $_SESSION['patient'][0];
 
                 if(!is_dir($dossier)) {
                     mkdir($dossier);

@@ -8,7 +8,7 @@ function resetTimer() {
 }
 
 function redirectToLogout() {
-    localStorage.setItem('errorSession', 'Votre session a expirée.')
+    localStorage.setItem('errorSession', 'Votre dernière session a expirée.')
     window.location.href = "src/deconnexion.php";
 }
 
