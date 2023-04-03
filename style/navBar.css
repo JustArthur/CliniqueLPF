@@ -37,6 +37,7 @@ nav ul.list li a {
     color: #000000;
     text-align: left;
     font-weight: 500;
+    font-size: .8rem;
 }
 
 nav ul.list li ul.dropdown li {
