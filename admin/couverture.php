@@ -20,7 +20,7 @@
     $couverture->execute([$_SESSION['patient'][0]]);
     $couverture = $couverture->fetch();
 
-    $nbrchambre = $DB->prepare('SELECT nbrPlaces from chambre group by idType');
+    $nbrchambre = $DB->prepare('SELECT sum(nbrPlaces) as \'nbrPlaces\' FROM chambre GROUP BY idType');
     $nbrchambre->execute();
     $nbrchambre = $nbrchambre->fetchAll();
 
