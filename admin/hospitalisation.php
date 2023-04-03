@@ -23,26 +23,34 @@
 
         if(isset($_POST['next'])) {
 
-            if($operation != 0 && $docteur != 0) {
-                $_SESSION['hospitalisation'] = array(
-                    $operation, //0
-                    $dateHospitalisation, //1
-                    $heureHospitalisation, //2
-                    $docteur //3
-                );
+            $selectOp = $DB->prepare('SELECT id FROM operations WHERE dateOperation = ? AND heureOperation = ? AND idMedecin = ?');
+            $selectOp->execute([$dateHospitalisation, $heureHospitalisation, $docteur]);
+            $selectOp = $selectOp->fetch();
 
-                $_SESSION['creer_admission'] = array(
-                    true, //0
-                    true, //1
-                    true, //2
-                    true, //3
-                    false //4
-                );
-
-                header('Location: couverture.php');
-                exit;
+            if(isset($selectOp)) {
+                $erreur = 'Le medecin n\'est pas disponible.';
             } else {
-                $erreur = "Certain champs sont invalides.";
+                if($operation != 0 && $docteur != 0) {
+                    $_SESSION['hospitalisation'] = array(
+                        $operation, //0
+                        $dateHospitalisation, //1
+                        $heureHospitalisation, //2
+                        $docteur //3
+                    );
+    
+                    $_SESSION['creer_admission'] = array(
+                        true, //0
+                        true, //1
+                        true, //2
+                        true, //3
+                        false //4
+                    );
+    
+                    header('Location: couverture.php');
+                    exit;
+                } else {
+                    $erreur = "Certain champs sont invalides.";
+                }
             }
         }
     }

@@ -71,23 +71,32 @@
         extract($_POST);
 
         if(isset($_POST['next'])) {
-            $updateOperation = $DB->prepare("UPDATE operations SET dateOperation = ?, heureOperation = ?, idMedecin = ? WHERE id = ?;");
-            $updateOperation->execute([$dateHospitalisation, $heureHospitalisation, $docteur, $_SESSION['modif_admission'][3]]);
-            
-            $updatePreadmission = $DB->prepare("UPDATE preadmission SET idMedecin = ? WHERE idOperation = ?");
-            $updatePreadmission->execute([$docteur, $_SESSION['modif_admission'][3]]);
 
-            $_SESSION['preadmission'] = array(
-                $_SESSION['modif_admission'][0], //0
-                $_SESSION['modif_admission'][1], //1
-                $docteur, //2
-                $_SESSION['modif_admission'][3], //3
-                $_SESSION['modif_admission'][4], //4
-                $_SESSION['modif_admission'][5] //5
-            );
+            $selectOp = $DB->prepare('SELECT id FROM operations WHERE dateOperation = ? AND heureOperation = ? AND idMedecin = ?');
+            $selectOp->execute([$dateHospitalisation, $heureHospitalisation, $docteur]);
+            $selectOp = $selectOp->fetch();
 
-            header('Location: couverture_modif.php');
-            exit;
+            if(isset($selectOp)) {
+                $erreur = 'Le medecin n\'est pas disponible.';
+            } else {
+                $updateOperation = $DB->prepare("UPDATE operations SET dateOperation = ?, heureOperation = ?, idMedecin = ? WHERE id = ?;");
+                $updateOperation->execute([$dateHospitalisation, $heureHospitalisation, $docteur, $_SESSION['modif_admission'][3]]);
+                
+                $updatePreadmission = $DB->prepare("UPDATE preadmission SET idMedecin = ? WHERE idOperation = ?");
+                $updatePreadmission->execute([$docteur, $_SESSION['modif_admission'][3]]);
+
+                $_SESSION['preadmission'] = array(
+                    $_SESSION['modif_admission'][0], //0
+                    $_SESSION['modif_admission'][1], //1
+                    $docteur, //2
+                    $_SESSION['modif_admission'][3], //3
+                    $_SESSION['modif_admission'][4], //4
+                    $_SESSION['modif_admission'][5] //5
+                );
+
+                header('Location: couverture_modif.php');
+                exit;
+            }
         }
     }
 ?>

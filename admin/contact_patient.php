@@ -115,7 +115,7 @@
 
             <input type="text" required name="prenomConfiance" value="<?= $_SESSION['personneConfiance'][1] ?>" placeholder="Prénom de la personne de confiance">
 
-            <input type="tel" required name="telConfiance" value="<?= $_SESSION['personneConfiance'][2] ?>" placeholder="Téléphone de la personne de confiance">
+            <input type="tel" maxlength="10" required name="telConfiance" value="<?= $_SESSION['personneConfiance'][2] ?>" placeholder="Téléphone de la personne de confiance">
 
             <input type="text" required name="adresseConfiance" value="<?= $_SESSION['personneConfiance'][3] ?>" placeholder="Adresse de la personne de confiance">
 
@@ -127,7 +127,7 @@
 
             <input type="text" required name="prenomPrevenir" value="<?= $_SESSION['personnePrevenir'][1] ?>" placeholder="Prénom de la personne à prévenir">
 
-            <input type="text" required name="telPrevenir" value="<?= $_SESSION['personnePrevenir'][2] ?>" placeholder="Téléphone de la personne à prévenir">
+            <input type="text" maxlength="10" required name="telPrevenir" value="<?= $_SESSION['personnePrevenir'][2] ?>" placeholder="Téléphone de la personne à prévenir">
 
             <input type="text" required name="adressePrevenir" value="<?= $_SESSION['personnePrevenir'][3] ?>" placeholder="Adresse de la personne à prévenir">
 
