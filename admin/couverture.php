@@ -20,6 +20,10 @@
     $couverture->execute([$_SESSION['patient'][0]]);
     $couverture = $couverture->fetch();
 
+    $nbrchambre = $DB->prepare('SELECT nbrPlaces from chambre group by idType');
+    $nbrchambre->execute();
+    $nbrchambre = $nbrchambre->fetchAll();
+
     if(isset($couverture['numSecu'])) {
         $_SESSION['couvertureSociale'] = array(
             $_SESSION['patient'][0], //0
@@ -156,13 +160,13 @@
                 <option hidden value=0 > Chambre particulière ?</option>
 
                 <optgroup label="Avec équipements">
-                    <option value=1>Chambre seul avec équipements</option>
-                    <option value=2>Chambre partager avec équipements</option>
+                    <option value=1>Chambre seul avec équipements (Places : <?= $nbrchambre[0]['nbrPlaces'] ?>)</option>
+                    <option value=2>Chambre partager avec équipements (Places : <?= $nbrchambre[1]['nbrPlaces'] ?>)</option>
                 </optgroup>
 
                 <optgroup label="Sans équipements">
-                    <option value=3>Chambre seul sans équipements</option>
-                    <option value=4>Chambre partager sans équipements</option>
+                    <option value=3>Chambre seul sans équipements (Places : <?= $nbrchambre[2]['nbrPlaces'] ?>)</option>
+                    <option value=4>Chambre partager sans équipements (Places : <?= $nbrchambre[3]['nbrPlaces'] ?>)</option>
                 </optgroup>
             </select>
 

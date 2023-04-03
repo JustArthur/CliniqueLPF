@@ -74,9 +74,9 @@
 
             $selectOp = $DB->prepare('SELECT id FROM operations WHERE dateOperation = ? AND heureOperation = ? AND idMedecin = ?');
             $selectOp->execute([$dateHospitalisation, $heureHospitalisation, $docteur]);
-            $selectOp = $selectOp->fetch();
+            $selectOp = $selectOp->rowCount();
 
-            if(isset($selectOp)) {
+            if($selectOp >= 1)  {
                 $erreur = 'Le medecin n\'est pas disponible.';
             } else {
                 $updateOperation = $DB->prepare("UPDATE operations SET dateOperation = ?, heureOperation = ?, idMedecin = ? WHERE id = ?;");

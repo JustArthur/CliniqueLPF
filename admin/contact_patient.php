@@ -55,32 +55,51 @@
         extract($_POST);
 
         if(isset($_POST['next'])) {
-            $_SESSION['personneConfiance'] = array(
-                $nomConfiance, //0
-                $prenomConfiance, //1
-                $telConfiance, //2
-                $adresseConfiance, //3
-                $_SESSION['patient'][0] //4
-            );
 
-            $_SESSION['personnePrevenir'] = array(
-                $nomPrevenir, //0
-                $prenomPrevenir, //1
-                $telPrevenir, //2
-                $adressePrevenir, //3
-                $_SESSION['patient'][0] //4
-            );
+            if(!empty($telConfiance) && !empty($telPrevenir)) {
+                $_SESSION['personneConfiance'] = array(
+                    $nomConfiance, //0
+                    $prenomConfiance, //1
+                    $telConfiance, //2
+                    $adresseConfiance, //3
+                    $_SESSION['patient'][0] //4
+                );
+    
+                $_SESSION['personnePrevenir'] = array(
+                    $nomPrevenir, //0
+                    $prenomPrevenir, //1
+                    $telPrevenir, //2
+                    $adressePrevenir, //3
+                    $_SESSION['patient'][0] //4
+                );
+    
+                $_SESSION['creer_admission'] = array(
+                    true, //0
+                    true, //1
+                    true, //2
+                    false, //3
+                    false //4
+                );
+    
+                header('Location: hospitalisation.php');
+                exit;
+            } else {
+                $_SESSION['personneConfiance'] = array(
+                    $nomConfiance, //0
+                    $prenomConfiance, //1
+                    '', //2
+                    $adresseConfiance, //3
+                );
+    
+                $_SESSION['personnePrevenir'] = array(
+                    $nomPrevenir, //0
+                    $prenomPrevenir, //1
+                    '', //2
+                    $adressePrevenir, //3
+                );
 
-            $_SESSION['creer_admission'] = array(
-                true, //0
-                true, //1
-                true, //2
-                false, //3
-                false //4
-            );
-
-            header('Location: hospitalisation.php');
-            exit;
+                $erreur = 'Le(s) numéro(s) de téléphone(s) est/sont invalide(s)';
+            }
         }
     }
 ?>
@@ -109,13 +128,13 @@
         <form method="post">
             <h2>Personne de confiance</h2>
 
-            <!-- <div class="erreur">test</div> -->
+            <?php if(isset($erreur)) { ?><div class="erreur active"><?= $erreur ?></div><?php } ?>
 
             <input type="text" required name="nomConfiance" value="<?= $_SESSION['personneConfiance'][0] ?>" placeholder="Nom de la personne de confiance">
 
             <input type="text" required name="prenomConfiance" value="<?= $_SESSION['personneConfiance'][1] ?>" placeholder="Prénom de la personne de confiance">
 
-            <input type="tel" maxlength="10" required name="telConfiance" value="<?= $_SESSION['personneConfiance'][2] ?>" placeholder="Téléphone de la personne de confiance">
+            <input type="tel" maxlength="10" minlenght="10" name="telConfiance" pattern="[0-9]*" value="<?= $_SESSION['personneConfiance'][2] ?>" placeholder="Téléphone de la personne de confiance">
 
             <input type="text" required name="adresseConfiance" value="<?= $_SESSION['personneConfiance'][3] ?>" placeholder="Adresse de la personne de confiance">
 
@@ -127,7 +146,7 @@
 
             <input type="text" required name="prenomPrevenir" value="<?= $_SESSION['personnePrevenir'][1] ?>" placeholder="Prénom de la personne à prévenir">
 
-            <input type="text" maxlength="10" required name="telPrevenir" value="<?= $_SESSION['personnePrevenir'][2] ?>" placeholder="Téléphone de la personne à prévenir">
+            <input type="text" maxlength="10" minlenght="10" pattern="[0-9]*" name="telPrevenir" value="<?= $_SESSION['personnePrevenir'][2] ?>" placeholder="Téléphone de la personne à prévenir">
 
             <input type="text" required name="adressePrevenir" value="<?= $_SESSION['personnePrevenir'][3] ?>" placeholder="Adresse de la personne à prévenir">
 

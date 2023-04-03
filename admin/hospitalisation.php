@@ -25,10 +25,19 @@
 
             $selectOp = $DB->prepare('SELECT id FROM operations WHERE dateOperation = ? AND heureOperation = ? AND idMedecin = ?');
             $selectOp->execute([$dateHospitalisation, $heureHospitalisation, $docteur]);
-            $selectOp = $selectOp->fetch();
+            $selectOp = $selectOp->rowCount();
 
-            if(isset($selectOp)) {
+            if($selectOp >= 1) {
+
+                $_SESSION['hospitalisation'] = array(
+                    $operation, //0
+                    $dateHospitalisation, //1
+                    $heureHospitalisation, //2
+                    '' //3
+                );
+
                 $erreur = 'Le medecin n\'est pas disponible.';
+
             } else {
                 if($operation != 0 && $docteur != 0) {
                     $_SESSION['hospitalisation'] = array(
@@ -49,6 +58,12 @@
                     header('Location: couverture.php');
                     exit;
                 } else {
+                    $_SESSION['hospitalisation'] = array(
+                        $operation, //0
+                        $dateHospitalisation, //1
+                        $heureHospitalisation, //2
+                        $docteur //3
+                    );
                     $erreur = "Certain champs sont invalides.";
                 }
             }

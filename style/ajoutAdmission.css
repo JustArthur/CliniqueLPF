@@ -63,6 +63,28 @@ main form input {
     font-size: 18px;
 }
 
+main input:invalid {
+    animation: shake 300ms;
+}
+
+main input[type='file'] {
+    animation: none;
+}
+
+@keyframes shake {
+    25% {
+        transform: translateX(8px);
+    }
+
+    50% {
+        transform: translateX(-8px);
+    }
+
+    75% {
+        transform: translateX(8px);
+    }
+}
+
 main form select {
     background: #FFFFFF;
     border: 2px solid #D0D0D0;

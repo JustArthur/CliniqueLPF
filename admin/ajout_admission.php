@@ -23,57 +23,80 @@
 
         if(isset($_POST['next'])) {
 
-            if($civilite != 'none') {
-                $numSecu = $_SESSION['patient'][0];
-                $bool = $_SESSION['patient'][11];
+            if(!empty($telephone)) {
+                if(!empty($codePostal)) {
+                    if($civilite != 'none') {
+                        $numSecu = $_SESSION['patient'][0];
+                        $bool = $_SESSION['patient'][11];
 
-                //Voir si il est mineur ou non
-                $dateDepart = $dateNaissance;
-                $dateAujourdhui = date('Y-m-d');
+                        //Voir si il est mineur ou non
+                        $dateDepart = $dateNaissance;
+                        $dateAujourdhui = date('Y-m-d');
+                    
+                        $duree = 18;
+                    
+                        $dateDepartTimestamp = strtotime($dateDepart);
+                    
+                        $dateFin = date('Y-m-d', strtotime('+'.$duree.' year', $dateDepartTimestamp));
+                    
+                        if($dateFin >= $dateAujourdhui) {
+                            $mineur = true;
+                        } else {
+                            $mineur = false;
+                        }
             
-                $duree = 18;
+
+                        //Les sessions
+                        $_SESSION['patient'] = array(
+                            $numSecu, //0
+                            $civilite, //1
+                            $nomNaissance, //2
+                            $nomEpouse, //3
+                            $prenom, //4
+                            $dateNaissance, //5
+                            $adresse, //6
+                            $codePostal, //7
+                            $ville, //8
+                            $email, //9
+                            '0'.$telephone, //10
+                            $bool, //11
+                            $mineur //12
+                        );
+
+                        $_SESSION['creer_admission'] = array(
+                            true, //0
+                            true, //1
+                            false, //2
+                            false, //3
+                            false //4 
+                        );
             
-                $dateDepartTimestamp = strtotime($dateDepart);
-            
-                $dateFin = date('Y-m-d', strtotime('+'.$duree.' year', $dateDepartTimestamp));
-            
-                if($dateFin >= $dateAujourdhui) {
-                    $mineur = true;
+                        header('Location: contact_patient.php');
+                        exit;
+                    } else {
+                        $numSecu = $_SESSION['patient'][0];
+
+                        $_SESSION['patient'] = array(
+                            $numSecu, //0
+                            '', //1
+                            $nomNaissance, //2
+                            $nomEpouse, //3
+                            $prenom, //4
+                            $dateNaissance, //5
+                            $adresse, //6
+                            $codePostal, //7
+                            $ville, //8
+                            $email, //9
+                            '0'.$telephone, //10
+                        );
+                        $erreur = 'Veillez choisir le sexe du patient.';
+                    } 
                 } else {
-                    $mineur = false;
+                    $erreur = 'Code postal mauvais.';
                 }
-    
-
-                //Les sessions
-                $_SESSION['patient'] = array(
-                    $numSecu, //0
-                    $civilite, //1
-                    $nomNaissance, //2
-                    $nomEpouse, //3
-                    $prenom, //4
-                    $dateNaissance, //5
-                    $adresse, //6
-                    $codePostal, //7
-                    $ville, //8
-                    $email, //9
-                    '0'.$telephone, //10
-                    $bool, //11
-                    $mineur //12
-                );
-
-                $_SESSION['creer_admission'] = array(
-                    true, //0
-                    true, //1
-                    false, //2
-                    false, //3
-                    false //4 
-                );
-    
-                header('Location: contact_patient.php');
-                exit;
             } else {
-                $erreur = 'Veillez choisir le sexe du patient.';
-            }            
+                $erreur = 'Numéro de téléphone vide.';
+            }           
         }
     }
 
@@ -140,13 +163,13 @@
             
             <input required type="text" name="adresse" value="<?= $_SESSION['patient'][6] ?>" placeholder="Adresse">
 
-            <input required maxlength="5" type="number" name="codePostal" value="<?= $_SESSION['patient'][7] ?>" placeholder="Code postal">
+            <input maxlength="5" type="text" pattern="[0-9]*" name="codePostal" value="<?= $_SESSION['patient'][7] ?>" placeholder="Code postal">
 
             <input required type="ville" name="ville" value="<?= $_SESSION['patient'][8] ?>" placeholder="Ville">
 
             <input required type="email" name="email" value="<?= $_SESSION['patient'][9] ?>" placeholder="Adresse mail">
 
-            <input required maxlength="10" type="tel" name="telephone" value="<?= $_SESSION['patient'][10] ?>" placeholder="Numéro de téléphone">
+            <input maxlength="10" minlength="10" pattern="[0-9]*" type="tel" name="telephone" value="<?= $_SESSION['patient'][10] ?>" placeholder="Numéro de téléphone">
 
             <input type="submit" name="next" value="Continuer">
         </form>
