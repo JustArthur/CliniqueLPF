@@ -58,12 +58,14 @@
                     header('Location: couverture.php');
                     exit;
                 } else {
+
                     $_SESSION['hospitalisation'] = array(
                         $operation, //0
                         $dateHospitalisation, //1
                         $heureHospitalisation, //2
                         $docteur //3
                     );
+
                     $erreur = "Certain champs sont invalides.";
                 }
             }
@@ -109,7 +111,7 @@
 
             <input type="date" name="dateHospitalisation" id="" min="<?= $dateMin ?>">
 
-            <input type="time" name="heureHospitalisation" id="">
+            <input type="time" name="heureHospitalisation" value="<?= $_SESSION['hospitalisation'][2] ?>" id="">
 
             <select name="docteur" id="">
                 <option hidden value=0>Choisir le médecin</option>

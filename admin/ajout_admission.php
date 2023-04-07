@@ -15,6 +15,7 @@
     }
 
     $dateMax = date('Y-m-d', time());
+    $dateMin = date('Y-m-d', strtotime('-100year', time()));
 
     $erreur = '';
     
@@ -25,19 +26,18 @@
 
             if(!empty($telephone)) {
                 if(!empty($codePostal)) {
-                    if($civilite != 'none') {
+                    if($civilite != 'none' || $civilite != $_SESSION['verifNumSecu'][0]) {
                         $numSecu = $_SESSION['patient'][0];
                         $bool = $_SESSION['patient'][11];
 
-                        //Voir si il est mineur ou non
+
+                        //Voir s'il est mineur ou non
                         $dateDepart = $dateNaissance;
                         $dateAujourdhui = date('Y-m-d');
                     
-                        $duree = 18;
-                    
                         $dateDepartTimestamp = strtotime($dateDepart);
                     
-                        $dateFin = date('Y-m-d', strtotime('+'.$duree.' year', $dateDepartTimestamp));
+                        $dateFin = date('Y-m-d', strtotime('+18year', $dateDepartTimestamp));
                     
                         if($dateFin >= $dateAujourdhui) {
                             $mineur = true;
@@ -45,35 +45,8 @@
                             $mineur = false;
                         }
 
-                        //Les sessions
-                        $_SESSION['patient'] = array(
-                            $numSecu, //0
-                            $civilite, //1
-                            $nomNaissance, //2
-                            $nomEpouse, //3
-                            $prenom, //4
-                            $dateNaissance, //5
-                            $adresse, //6
-                            $codePostal, //7
-                            $ville, //8
-                            $email, //9
-                            '0'.$telephone, //10
-                            $bool, //11
-                            $mineur //12
-                        );
-
-                        $_SESSION['creer_admission'] = array(
-                            true, //0
-                            true, //1
-                            false, //2
-                            false, //3
-                            false //4 
-                        );
-
-
-                        //Vérifie la cohérence des données
                         if($civilite != $_SESSION['verifNumSecu'][0]) {
-                            $erreur = 'Le sexe du patient ne correspond pas.';
+                            $erreur = 'Le sexe ne correspond pas au Numéro de Sécurité Social.';
 
                         } elseif($_SESSION['verifNumSecu'][1] != date('y', strtotime(($dateNaissance)))) {
                             $erreur = 'L\'année saisi ne correspond pas au Numéro de Sécurité Social.';
@@ -127,34 +100,24 @@
                             $email, //9
                             '0'.$telephone, //10
                         );
-                        $erreur = 'Veillez choisir le sexe du patient.';
+                        $erreur = 'Erreur sur le sexe du patient.';
                     } 
                 } else {
-                    $erreur = 'Code postal mauvais.';
+                    $erreur = 'Erreur sur le code postal.';
                 }
             } else {
-                $erreur = 'Numéro de téléphone vide.';
+                $erreur = 'Erreur sur le numéro de téléphone.';
             }           
         }
     }
 
-    switch($_SESSION['patient'][1] || $_SESSION['verifNumSecu'][0]) {
+    switch($_SESSION['verifNumSecu'][0]) {
         case 'Homme':
             $homme = 'selected';
             $femme = '';
         break;
 
         case 'Femme':
-            $homme = '';
-            $femme = 'selected';
-        break;
-
-        case 1:
-            $homme = 'selected';
-            $femme = '';
-        break;
-
-        case 2:
             $homme = '';
             $femme = 'selected';
         break;
@@ -207,7 +170,7 @@
 
             <input required type="text" name="prenom" value="<?= $_SESSION['patient'][4] ?>" placeholder="Prénom">
 
-            <input required type="date" name="dateNaissance" value="<?= $_SESSION['patient'][5] ?>" max="<?= $dateMax ?>">
+            <input required type="date" name="dateNaissance" value="<?= $_SESSION['patient'][5] ?>" max="<?= $dateMax ?>" min="<?= $dateMin ?>">
             
             <input required type="text" name="adresse" value="<?= $_SESSION['patient'][6] ?>" placeholder="Adresse">
 

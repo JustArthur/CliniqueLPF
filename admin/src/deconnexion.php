@@ -15,6 +15,7 @@
     $_SESSION['hospitalisation'] = array();
     $_SESSION['couvertureSociale'] = array();
     $_SESSION['creer_admission'] = array();
+    $_SESSION['verifNumSecu'] = array();
 
     session_destroy();
 

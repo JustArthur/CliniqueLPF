@@ -64,8 +64,8 @@
                         $chercheNumSecu['ville'], //8
                         $chercheNumSecu['email'], //9
                         '0'.$chercheNumSecu['telephone'], //10
-                        true, //11
-                        true //12
+                        true, //11 - Si le patient existe en true
+                        true //12 - Si le patient existe en true
                     );
 
                     $_SESSION['creer_admission'] = array(
@@ -74,6 +74,26 @@
                         false, //2
                         false, //3
                         false //4
+                    );
+
+                    $sexePatient = substr($numSecu, 0, 1);
+                    $anneePatient = substr($numSecu, 1, 2);
+                    $moisPatient = substr($numSecu, 3, 2);
+                    
+                    switch($sexePatient) {
+                        case 1:
+                            $sexePatient = 'Homme';
+                        break;
+
+                        case 2:
+                            $sexePatient = 'Femme';
+                        break;
+                    };
+
+                    $_SESSION['verifNumSecu'] = array(
+                        $sexePatient, //0
+                        $anneePatient, //1
+                        $moisPatient //2
                     );
 
                     header('Location: ajout_admission.php');
