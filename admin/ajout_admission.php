@@ -45,6 +45,31 @@
                             $mineur = false;
                         }
 
+                        //Les sessions
+                        $_SESSION['patient'] = array(
+                            $numSecu, //0
+                            $civilite, //1
+                            $nomNaissance, //2
+                            $nomEpouse, //3
+                            $prenom, //4
+                            $dateNaissance, //5
+                            $adresse, //6
+                            $codePostal, //7
+                            $ville, //8
+                            $email, //9
+                            '0'.$telephone, //10
+                            $bool, //11
+                            $mineur //12
+                        );
+
+                        $_SESSION['creer_admission'] = array(
+                            true, //0
+                            true, //1
+                            false, //2
+                            false, //3
+                            false //4 
+                        );
+
 
                         //Vérifie la cohérence des données
                         if($civilite != $_SESSION['verifNumSecu'][0]) {
@@ -55,7 +80,7 @@
 
                         } elseif ($_SESSION['verifNumSecu'][2] != date('m', strtotime($dateNaissance))) {
                             $erreur = 'Le mois saisi ne correspond pas au Numéro de Sécurité Social.';
-                            
+
                         } else {
 
                             //Les sessions
