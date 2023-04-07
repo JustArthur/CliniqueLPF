@@ -44,35 +44,48 @@
                         } else {
                             $mineur = false;
                         }
-            
 
-                        //Les sessions
-                        $_SESSION['patient'] = array(
-                            $numSecu, //0
-                            $civilite, //1
-                            $nomNaissance, //2
-                            $nomEpouse, //3
-                            $prenom, //4
-                            $dateNaissance, //5
-                            $adresse, //6
-                            $codePostal, //7
-                            $ville, //8
-                            $email, //9
-                            '0'.$telephone, //10
-                            $bool, //11
-                            $mineur //12
-                        );
 
-                        $_SESSION['creer_admission'] = array(
-                            true, //0
-                            true, //1
-                            false, //2
-                            false, //3
-                            false //4 
-                        );
-            
-                        header('Location: contact_patient.php');
-                        exit;
+                        //Vérifie la cohérence des données
+                        if($civilite != $_SESSION['verifNumSecu'][0]) {
+                            $erreur = 'Le sexe du patient ne correspond pas.';
+
+                        } elseif($_SESSION['verifNumSecu'][1] != date('y', strtotime(($dateNaissance)))) {
+                            $erreur = 'L\'année saisi ne correspond pas au Numéro de Sécurité Social.';
+
+                        } elseif ($_SESSION['verifNumSecu'][2] != date('m', strtotime($dateNaissance))) {
+                            $erreur = 'Le mois saisi ne correspond pas au Numéro de Sécurité Social.';
+                            
+                        } else {
+
+                            //Les sessions
+                            $_SESSION['patient'] = array(
+                                $numSecu, //0
+                                $civilite, //1
+                                $nomNaissance, //2
+                                $nomEpouse, //3
+                                $prenom, //4
+                                $dateNaissance, //5
+                                $adresse, //6
+                                $codePostal, //7
+                                $ville, //8
+                                $email, //9
+                                '0'.$telephone, //10
+                                $bool, //11
+                                $mineur //12
+                            );
+
+                            $_SESSION['creer_admission'] = array(
+                                true, //0
+                                true, //1
+                                false, //2
+                                false, //3
+                                false //4 
+                            );
+
+                            header('Location: contact_patient.php');
+                            exit;
+                        }
                     } else {
                         $numSecu = $_SESSION['patient'][0];
 
@@ -100,13 +113,23 @@
         }
     }
 
-    switch($_SESSION['patient'][1]) {
+    switch($_SESSION['patient'][1] || $_SESSION['verifNumSecu'][0]) {
         case 'Homme':
             $homme = 'selected';
             $femme = '';
         break;
 
         case 'Femme':
+            $homme = '';
+            $femme = 'selected';
+        break;
+
+        case 1:
+            $homme = 'selected';
+            $femme = '';
+        break;
+
+        case 2:
             $homme = '';
             $femme = 'selected';
         break;

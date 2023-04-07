@@ -46,12 +46,6 @@
             }
 
             if(is_secsocnum($numSecu)) {
-
-                // $searchString = " ";
-                // $replaceString = "";
-                // $originalString = $numSecu; 
-                
-                // $numSecu = str_replace($searchString, $replaceString, $originalString); 
                 
                 $chercheNumSecu = $DB->prepare("SELECT * FROM patient WHERE numSecu = ?");
                 $chercheNumSecu->execute([$numSecu]);
@@ -86,7 +80,27 @@
                     exit;
 
                 } else {
-                    $_SESSION['patient'] = array($numSecu, '', '', '', '', '', '', '', '', '', false);
+                    $sexePatient = substr($numSecu, 0, 1);
+                    $anneePatient = substr($numSecu, 1, 2);
+                    $moisPatient = substr($numSecu, 3, 2);
+                    
+                    switch($sexePatient) {
+                        case 1:
+                            $sexePatient = 'Homme';
+                        break;
+
+                        case 2:
+                            $sexePatient = 'Femme';
+                        break;
+                    };
+
+                    $_SESSION['patient'] = array($numSecu, $sexePatient, '', '', '', '', '', '', '', '', false);
+
+                    $_SESSION['verifNumSecu'] = array(
+                        $sexePatient, //0
+                        $anneePatient, //1
+                        $moisPatient //2
+                    );
 
                     $_SESSION['creer_admission'] = array(
                         true, //0
