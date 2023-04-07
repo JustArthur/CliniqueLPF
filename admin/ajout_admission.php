@@ -211,9 +211,9 @@
             
             <input required type="text" name="adresse" value="<?= $_SESSION['patient'][6] ?>" placeholder="Adresse">
 
-            <input maxlength="5" type="text" pattern="[0-9]*" name="codePostal" value="<?= $_SESSION['patient'][7] ?>" placeholder="Code postal">
+            <input maxlength="5" type="text" pattern="[0-9]*" name="codePostal" id="codePostal" value="<?= $_SESSION['patient'][7] ?>" placeholder="Code postal">
 
-            <input required type="ville" name="ville" value="<?= $_SESSION['patient'][8] ?>" placeholder="Ville">
+            <input required type="ville" name="ville" value="<?= $_SESSION['patient'][8] ?>" id="ville" placeholder="Ville">
 
             <input required type="email" name="email" value="<?= $_SESSION['patient'][9] ?>" placeholder="Adresse mail">
 
@@ -223,6 +223,7 @@
         </form>
     </main>
     
+    <script src="js/codePostal.js"></script>
     <script src="js/expireConnexion.js"></script>
     
 </body>
