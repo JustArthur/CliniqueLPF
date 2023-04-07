@@ -110,11 +110,6 @@
                         false //4
                     );
 
-                    // $date = "d-". $moisPatient ."-xx". $anneePatient;
-                    // $full_date = $date;
-                    // echo $full_date;
-
-
                     header('Location: ajout_admission.php');
                     exit;
                 }
